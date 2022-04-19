@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="View" />
 				</Compiler>
 			</Target>
 		</Build>
@@ -22,6 +23,8 @@
 		<Linker>
 			<Add option="`fltk-config --ldstaticflags`" />
 		</Linker>
+		<Unit filename="View/WordleGameWindow.cpp" />
+		<Unit filename="View/WordleGameWindow.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
