@@ -22,13 +22,15 @@
 	<vector>
 	<iomanip>
 
-1650402129 source:/home/mthomp35/TeamEWordle/Wordle/main.cpp
+1650597604 source:/home/mthomp35/TeamEWordle/Wordle/main.cpp
 	<FL/Fl.H>
 	<FL/Fl_Window.H>
 	<FL/Fl_Box.H>
+	<Words.h>
+	<iostream>
 	"WordleGameWindow.h"
 
-1650402129 /home/mthomp35/TeamEWordle/Wordle/View/WordleGameWindow.h
+1650593566 /home/mthomp35/TeamEWordle/Wordle/View/WordleGameWindow.h
 	<FL/Fl.H>
 	<FL/Fl_Window.H>
 	<FL/Fl_Group.H>
@@ -42,12 +44,36 @@
 	<vector>
 	<iomanip>
 
-1650402129 source:/home/mthomp35/TeamEWordle/Wordle/View/WordleGameWindow.cpp
+1650593566 source:/home/mthomp35/TeamEWordle/Wordle/View/WordleGameWindow.cpp
 	"WordleGameWindow.h"
 
-1650402838 source:/home/mthomp35/TeamEWordle/Wordle/Model/Words.cpp
+1650597639 source:/home/mthomp35/TeamEWordle/Wordle/Model/Words.cpp
 	"Words.h"
+	<stdlib.h>
+	<iostream>
 
-1650402702 /home/mthomp35/TeamEWordle/Wordle/Model/Words.h
+1650596404 /home/mthomp35/TeamEWordle/Wordle/Model/Words.h
 	<string>
+	<vector>
+	<FileReader.h>
+
+1650594989 source:/home/mthomp35/TeamEWordle/Wordle/IO/FileReader.cpp
+	"FileReader.h"
+	<iostream>
+	<fstream>
+	<string>
+
+1650595039 /home/mthomp35/TeamEWordle/Wordle/IO/FileReader.h
+	"vector"
+	"string"
+
+1650597381 source:/home/mthomp35/TeamEWordle/Wordle/Model/FileReader.cpp
+	"FileReader.h"
+	<iostream>
+	<fstream>
+	<string>
+
+1650595358 /home/mthomp35/TeamEWordle/Wordle/Model/FileReader.h
+	"vector"
+	"string"
 
