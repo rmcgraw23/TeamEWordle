@@ -1,6 +1,7 @@
 #ifndef WORDLEGAMEWINDOW_H
 #define WORDLEGAMEWINDOW_H
 
+
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Group.H>
@@ -14,6 +15,8 @@
 #include <string>
 #include <vector>
 #include <iomanip>
+
+#include "../Model/Words.h"
 using namespace std;
 
 namespace View {
@@ -39,6 +42,11 @@ class WordleGameWindow : public Fl_Window
 
         void SetUpLetters();
         void SetUpButtons();
+
+        vector<Fl_Output*> *values;
+
+        void validateGuess(int start);
+        Words words;
 
     public:
         WordleGameWindow(int width, int height, const char* title);

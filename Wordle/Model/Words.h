@@ -2,7 +2,7 @@
 #define WORDS_H
 #include <string>
 #include <vector>
-#include <FileReader.h>
+#include "FileReader.h"
 
 using namespace std;
 

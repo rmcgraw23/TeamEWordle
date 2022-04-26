@@ -1,4 +1,6 @@
 #include "WordleGameWindow.h"
+#include "string"
+#include "cctype"
 
 namespace View {
 
@@ -6,16 +8,38 @@ WordleGameWindow::WordleGameWindow(int width, int height, const char* title) : F
 {
     begin();
 
+    this->values = new vector<Fl_Output*>();
+    this->words = Words();
     this->LabelBuffer = new Fl_Box(100, 20, 50, 50);
     this->SetUpLetters();
+    this->words.setWord("CANDY");
     //this->FirstLetterOutput = new Fl_Output(115, 75, 50, 50);
     //this->FirstLetterOutput = new Fl_Output(170, 75, 50, 50);
     //this->FirstLetterOutput = new Fl_Output(225, 75, 50, 50);
     //this->FirstLetterOutput = new Fl_Output(280, 75, 50, 50);
     //this->FirstLetterOutput = new Fl_Output(335, 75, 50, 50);
     //this->LetterOutputLabel->textsize(30);
-    //this->LetterOutputLabel->value(" A");
+    Fl_Output* value = this->values->at(0);
+    value->value("A");
+    value = this->values->at(1);
+    value->value("Y");
+    value = this->values->at(5);
+    value->value("C");
+    value = this->values->at(6);
+    value->value("A");
+    value = this->values->at(7);
+    value->value("N");
+    value = this->values->at(8);
+    value->value("D");
+    value = this->values->at(9);
+    value->value("Y");
     this->SetUpButtons();
+    this->validateGuess(0);
+    this->validateGuess(5);
+    this->validateGuess(10);
+    this->validateGuess(15);
+    this->validateGuess(20);
+    this->validateGuess(25);
     end();
 }
 
@@ -30,7 +54,6 @@ void WordleGameWindow::SetUpLetters()
     int y = INITIAL_Y;
     int width = WIDTH_BUFFER;
     int height = HEIGHT_BUFFER;
-    vector<Fl_Output*> *values = new vector<Fl_Output*>();
     for (int i = 0; i < 30; i++)
     {
         if (i > 4 && i < 6)
@@ -62,6 +85,29 @@ void WordleGameWindow::SetUpLetters()
         x += 55;
     }
 
+}
+
+void WordleGameWindow::validateGuess(int start)
+{
+    int count = 0;
+    for (int i = start; i < start + 5; i++ ) {
+
+        Fl_Output* value = this->values->at(i);
+        auto letter = value->value();
+
+        string word = this->words.getWord();
+        for(auto& c : word)
+        {
+        c = toupper(c);
+        }
+        if (word.find(*letter) != string::npos) {
+            value->color(FL_YELLOW);
+        }
+        if (*letter == word[count]) {
+            value->color(FL_GREEN);
+        }
+        count++;
+    }
 }
 
 void WordleGameWindow::SetUpButtons()
