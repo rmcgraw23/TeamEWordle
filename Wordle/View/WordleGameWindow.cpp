@@ -17,6 +17,8 @@ WordleGameWindow::WordleGameWindow(int width, int height, const char* title) : F
     //this->LetterOutputLabel->value(" A");
     this->SetUpButtons();
     end();
+
+    Fl::add_handler(keyhandler);
 }
 
 WordleGameWindow::~WordleGameWindow()
@@ -30,7 +32,7 @@ void WordleGameWindow::SetUpLetters()
     int y = INITIAL_Y;
     int width = WIDTH_BUFFER;
     int height = HEIGHT_BUFFER;
-    vector<Fl_Output*> *values = new vector<Fl_Output*>();
+    values = new vector<Fl_Box*>();
     for (int i = 0; i < 30; i++)
     {
         if (i > 4 && i < 6)
@@ -58,7 +60,11 @@ void WordleGameWindow::SetUpLetters()
             y = 325;
             x = 115;
         }
-        values->push_back(new Fl_Output(x, y, 50, 50));
+        Fl_Box *output = new Fl_Box(x, y, 50, 50);
+        output->labelsize(30);
+        output->box (FL_DOWN_BOX);
+        output->color(FL_WHITE);
+        values->push_back(output);
         x += 55;
     }
 
@@ -68,7 +74,8 @@ void WordleGameWindow::SetUpButtons()
 {
     int x = 55;
     int y = 385;
-    vector<Fl_Button*> *buttons = new vector<Fl_Button*>();
+    Fl_Button *button;
+    buttons = new vector<Fl_Button*>();
     for (int i = 0; i < 28; i++)
     {
         this->keyboardButons = new string(this->keyValues[i]);
@@ -76,27 +83,94 @@ void WordleGameWindow::SetUpButtons()
         {
             y = 440;
             x = 75;
-            buttons->push_back(new Fl_Button(x, y, 35, 50, this->keyboardButons->c_str()));
+            button = new Fl_Button(x, y, 35, 50, this->keyboardButons->c_str());
+            button->callback(keyboardButtonClicked, this);
+            buttons->push_back(button);
             x += 40;
         }
         else if (i > 18 && i < 20)
         {
             y = 495;
             x = 55;
-            buttons->push_back(new Fl_Button(x, y, 55, 50, this->keyboardButons->c_str()));
+            button = new Fl_Button(x, y, 55, 50, this->keyboardButons->c_str());
+            buttons->push_back(button);
             x += 60;
         }
         else if (i == 27)
         {
-            buttons->push_back(new Fl_Button(x, y, 55, 50, this->keyboardButons->c_str()));
+            button = new Fl_Button(x, y, 55, 50, this->keyboardButons->c_str());
+            button->callback(BackspaceButtonClicked, this);
+            buttons->push_back(button);
         }
         else
         {
-            buttons->push_back(new Fl_Button(x, y, 35, 50, this->keyboardButons->c_str()));
+            button = new Fl_Button(x, y, 35, 50, this->keyboardButons->c_str());
+            button->callback(keyboardButtonClicked, this);
+            buttons->push_back(button);
             x += 40;
         }
 
     }
+}
+
+int WordleGameWindow::keyhandler(int event) {
+
+    if (event == FL_SHORTCUT) {
+
+        if (Fl::event_key() == 'enter')
+        {
+            cout << Fl::event_text() << endl;
+            keyboardPressed;
+
+            return 1;
+        }
+        else if (Fl::event_key() == 'backspace')
+        {
+            cout << 'back' << endl;
+        }
+        else
+        {
+            cout << "back" << endl;
+        }
+    }
+    return 0;
+}
+
+void WordleGameWindow::keyboardButtonClicked(Fl_Widget* widget, void* data)
+{
+    WordleGameWindow* window = (WordleGameWindow*)data;
+    Fl_Button *button = (Fl_Button*) widget;
+    window->SetBoxValue(button->label());
+    window->currentBox += 1;
+    //cout << button->label() << endl;
+}
+
+void WordleGameWindow::keyboardPressed(Fl_Widget* widget, void* data)
+{
+    WordleGameWindow* window = (WordleGameWindow*)data;
+    //cout << "y" << endl;
+    window->SetBoxValue("y");
+}
+
+void WordleGameWindow::EnterButtonClicked(Fl_Widget* widget, void* data)
+{
+
+}
+
+void WordleGameWindow::BackspaceButtonClicked(Fl_Widget* widget, void* data)
+{
+    WordleGameWindow* window = (WordleGameWindow*)data;
+    if (window->currentBox > 0)
+    {
+        window->currentBox -= 1;
+    }
+    window->values->at(window->currentBox)->label("");
+}
+
+void WordleGameWindow::SetBoxValue(const char* value)
+{
+    Fl_Box* box = this->values->at(this->currentBox);
+    box->label(value);
 }
 
 }

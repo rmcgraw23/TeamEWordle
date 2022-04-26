@@ -10,10 +10,12 @@
 #include <FL/Fl_Text_Display.H>
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Box.H>
+#include <FL/Fl_Input.H>
 
 #include <string>
 #include <vector>
 #include <iomanip>
+#include <iostream>
 using namespace std;
 
 namespace View {
@@ -26,6 +28,10 @@ class WordleGameWindow : public Fl_Window
         static const int WIDTH_BUFFER = 50;
         static const int HEIGHT_BUFFER = 50;
         static const int LETTERS_PER_ROW = 5;
+        int currentBox = 0;
+
+        vector<Fl_Box*> *values;
+        vector<Fl_Button*> *buttons;
 
         vector<string> keyValues = {"Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "A", "S", "D", "F",
                                     "G", "H", "J", "K", "L", "enter", "Z", "X", "C", "V", "B", "N", "M", "back"};
@@ -40,9 +46,18 @@ class WordleGameWindow : public Fl_Window
         void SetUpLetters();
         void SetUpButtons();
 
+        static int keyhandler(int event);
+        static WordleGameWindow* window;
+
     public:
         WordleGameWindow(int width, int height, const char* title);
         virtual ~WordleGameWindow();
+
+        static void keyboardButtonClicked(Fl_Widget* widget, void* data);
+        static void keyboardPressed(Fl_Widget* widget, void* data);
+        static void EnterButtonClicked(Fl_Widget* widget, void* data);
+        static void BackspaceButtonClicked(Fl_Widget* widget, void* data);
+        void SetBoxValue(const char* value);
 
 };
 
