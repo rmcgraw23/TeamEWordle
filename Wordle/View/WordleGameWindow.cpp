@@ -9,7 +9,7 @@ WordleGameWindow::WordleGameWindow(int width, int height, const char* title) : F
     this->LabelBuffer = new Fl_Box(100, 20, 50, 50);
     values = new vector<Fl_Box*>();
     this->SetUpLetters();
-    this->words.setWord("APPLE");
+    cout << this->words.getWord() << endl;
     //this->FirstLetterOutput = new Fl_Output(115, 75, 50, 50);
     //this->FirstLetterOutput = new Fl_Output(170, 75, 50, 50);
     //this->FirstLetterOutput = new Fl_Output(225, 75, 50, 50);
