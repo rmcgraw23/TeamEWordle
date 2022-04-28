@@ -11,6 +11,7 @@
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Input.H>
+#include "../Model/Words.h"
 
 #include <string>
 #include <vector>
@@ -37,6 +38,7 @@ class WordleGameWindow : public Fl_Window
                                     "G", "H", "J", "K", "L", "enter", "Z", "X", "C", "V", "B", "N", "M", "back"};
         string* keyboardButons;
         Fl_Box *LabelBuffer;
+        Fl_Label *label;
         Fl_Output *FirstLetterOutput;
         Fl_Output *SecondLetterOutput;
         Fl_Output *ThirdLetterOutput;
@@ -48,6 +50,8 @@ class WordleGameWindow : public Fl_Window
 
         static int keyhandler(int event);
         static WordleGameWindow* window;
+        Words words;
+        void validateGuess(int start);
 
     public:
         WordleGameWindow(int width, int height, const char* title);

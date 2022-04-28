@@ -45,7 +45,8 @@ void Words::setWord(string word)
 
 void Words::setRandomWord()
 {
-    int randomIndex = rand() % this->words.size();
+    srand(time(0));
+    int randomIndex = (rand() % this->words.size()) + 1;
     this->word = this->words[randomIndex];
 
 
