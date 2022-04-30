@@ -1,4 +1,5 @@
 #include "WordleGameWindow.h"
+#define Level_1
 
 namespace View {
 
@@ -9,7 +10,9 @@ WordleGameWindow::WordleGameWindow(int width, int height, const char* title) : F
     this->LabelBuffer = new Fl_Box(100, 20, 50, 50);
     values = new vector<Fl_Box*>();
     this->SetUpLetters();
+    #ifdef Level_1
     cout << this->words.getWord() << endl;
+    #endif
     //this->FirstLetterOutput = new Fl_Output(115, 75, 50, 50);
     //this->FirstLetterOutput = new Fl_Output(170, 75, 50, 50);
     //this->FirstLetterOutput = new Fl_Output(225, 75, 50, 50);
