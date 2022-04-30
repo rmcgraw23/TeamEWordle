@@ -17,7 +17,12 @@
 #include <vector>
 #include <iomanip>
 #include <iostream>
+#include <algorithm>
+#include <cstring>
 using namespace std;
+
+#include <../Model/Words.h>
+using namespace model;
 
 namespace View {
 
@@ -52,6 +57,8 @@ class WordleGameWindow : public Fl_Window
         static WordleGameWindow* window;
         Words words;
         void validateGuess(int start);
+
+        Words* word;
 
     public:
         WordleGameWindow(int width, int height, const char* title);

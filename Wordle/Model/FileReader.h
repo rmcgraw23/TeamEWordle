@@ -4,6 +4,8 @@
 #include "string"
 using namespace std;
 
+namespace model
+{
 
 class FileReader
 {
@@ -16,5 +18,7 @@ class FileReader
 
     private:
 };
+
+}
 
 #endif // FILEREADER_H

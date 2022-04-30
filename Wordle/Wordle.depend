@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1650565147 source:/home/rmcgraw1/Desktop/TeamEWordle/Wordle/main.cpp
+1650946745 source:/home/rmcgraw1/Desktop/TeamEWordle/Wordle/main.cpp
 	<FL/Fl.H>
 	<FL/Fl_Window.H>
 	<FL/Fl_Box.H>
@@ -12,7 +12,7 @@
 1650946503 source:/home/rmcgraw1/Desktop/TeamEWordle/Wordle/View/WordleGameWindow.cpp
 	"WordleGameWindow.h"
 
-1650946150 /home/rmcgraw1/Desktop/TeamEWordle/Wordle/View/WordleGameWindow.h
+1650953458 /home/rmcgraw1/Desktop/TeamEWordle/Wordle/View/WordleGameWindow.h
 	<FL/Fl.H>
 	<FL/Fl_Window.H>
 	<FL/Fl_Group.H>
@@ -27,6 +27,9 @@
 	<vector>
 	<iomanip>
 	<iostream>
+	<algorithm>
+	<cstring>
+	<../Model/Words.h>
 
 1650949672 source:/home/mthomp35/TeamEWordle/Wordle/main.cpp
 	<FL/Fl.H>
@@ -88,9 +91,23 @@
 	"vector"
 	"string"
 
-1650508537 source:/home/rmcgraw1/Desktop/TeamEWordle/Wordle/Model/Words.cpp
+1650950711 source:/home/rmcgraw1/Desktop/TeamEWordle/Wordle/Model/Words.cpp
 	"Words.h"
+	<stdlib.h>
+	<iostream>
 
-1650508537 /home/rmcgraw1/Desktop/TeamEWordle/Wordle/Model/Words.h
+1650950863 /home/rmcgraw1/Desktop/TeamEWordle/Wordle/Model/Words.h
 	<string>
+	<vector>
+	"FileReader.h"
+
+1650950863 source:/home/rmcgraw1/Desktop/TeamEWordle/Wordle/Model/FileReader.cpp
+	"FileReader.h"
+	<iostream>
+	<fstream>
+	<string>
+
+1650950895 /home/rmcgraw1/Desktop/TeamEWordle/Wordle/Model/FileReader.h
+	"vector"
+	"string"
 
