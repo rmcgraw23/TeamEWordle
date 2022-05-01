@@ -10,6 +10,7 @@ WordleGameWindow::WordleGameWindow(int width, int height, const char* title) : F
     this->words = Words();
     this->LabelBuffer = new Fl_Box(100, 20, 50, 50);
     values = new vector<Fl_Box*>();
+    buttons = new vector<Fl_Button*>();
     this->SetUpLetters();
     #ifdef Level_1
     cout << this->words.getWord() << endl;
@@ -153,8 +154,10 @@ void WordleGameWindow::validateGuess(int start)
 {
     string guess = string("");
     int count = 0;
+    Fl_Button* button = this->buttons->at(4);
     for (int i = start; i < start + 5; i++ ) {
         Fl_Box* value = this->values->at(i);
+        Fl_Button* button;
         auto letter = value->label();
         string word = this->words.getWord();
         for(auto& c : word)
@@ -162,13 +165,36 @@ void WordleGameWindow::validateGuess(int start)
         c = toupper(c);
         }
         if (letter != nullptr) {
+
         guess += letter;
+         for (int i = 0; i < this->buttons->size(); i++ ) {
+            button = this->buttons->at(i);
+            const char* buttonLetter = button->label();
+            if (buttonLetter == letter) {
+                 button->color(FL_DARK2);
+            }
+            }
         if (word.find(letter) != string::npos) {
             value->color(FL_YELLOW);
+            for (int i = 0; i < this->buttons->size(); i++ ) {
+            button = this->buttons->at(i);
+            const char* buttonLetter = button->label();
+            if (buttonLetter == letter) {
+                 button->color(FL_YELLOW);
+            }
+            }
         }
         if (*letter == word[count]) {
             value->color(FL_GREEN);
+            for (int i = 0; i < this->buttons->size(); i++ ) {
+            button = this->buttons->at(i);
+            const char* buttonLetter = button->label();
+            if (buttonLetter == letter) {
+                 button->color(FL_GREEN);
+            }
+            }
         }
+
         }
         count++;
     }
