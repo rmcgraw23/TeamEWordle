@@ -1,4 +1,5 @@
 #include "WordleGameWindow.h"
+#include <algorithm>
 #define Level_1
 
 namespace View {
@@ -118,6 +119,36 @@ void WordleGameWindow::SetUpButtons()
     }
 }
 
+void WordleGameWindow::isValidWord() {
+    Fl_Box* value5 = this->values->at(4);
+    Fl_Box* value1 = this->values->at(0);
+    Fl_Box* value2 = this->values->at(1);
+    Fl_Box* value3 = this->values->at(2);
+    Fl_Box* value4 = this->values->at(3);
+    auto letter = value5->label();
+    if (letter != nullptr){
+        string guess = string("");
+        guess += value1->label();
+        guess += value2->label();
+        guess += value3->label();
+        guess += value4->label();
+        guess += value5->label();
+        for(auto& c : guess)
+        {
+        c = tolower(c);
+        }
+        cout << guess << endl;
+        vector<string> gameWords = words.getWords();
+    if(std::find(gameWords.begin(), gameWords.end(), guess) != gameWords.end()) {
+    cout << "valid" <<endl;
+    } else {
+    cout << "invalid" <<endl;
+    }
+
+
+    }
+}
+
 void WordleGameWindow::validateGuess(int start)
 {
     string guess = string("");
@@ -206,6 +237,7 @@ void WordleGameWindow::SetBoxValue(const char* value)
 {
     Fl_Box* box = this->values->at(this->currentBox);
     box->label(value);
+    this->isValidWord();
     this->validateGuess(0);
     this->validateGuess(5);
     this->validateGuess(10);
