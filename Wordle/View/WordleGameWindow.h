@@ -52,6 +52,7 @@ class WordleGameWindow : public Fl_Window
         static WordleGameWindow* window;
         Words words;
         void validateGuess(int start);
+        void isValidWord();
 
     public:
         WordleGameWindow(int width, int height, const char* title);
