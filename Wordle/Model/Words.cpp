@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <iostream>
 
+namespace model
+{
+
 Words::Words()
 {
     this->guessCount = 0;
@@ -49,5 +52,7 @@ void Words::setRandomWord()
     int randomIndex = (rand() % this->words.size()) + 1;
     this->word = this->words[randomIndex];
 
+
+}
 
 }
