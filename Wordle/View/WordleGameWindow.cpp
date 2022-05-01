@@ -18,9 +18,15 @@ WordleGameWindow::WordleGameWindow(int width, int height, const char* title) : F
     //this->LetterOutputLabel->textsize(30);
     //this->LetterOutputLabel->value(" A");
     this->SetUpButtons();
+    string result = "";
     end();
-
+    this->word = new Words();
+    //Fl_Event_Handler event = new Fl_Event_Handler(keyhandler);
+    //window = new WordleGameWindow(600, 500, "Wordle");
+    this->GetWindow(this);
     Fl::add_handler(keyhandler);
+    //this->buttons->at(19)->callback(EnterButtonClicked, this);
+    //this->buttons->at(19)->when(FL_WHEN_ENTER_KEY_ALWAYS);
 }
 
 WordleGameWindow::~WordleGameWindow()
@@ -117,12 +123,17 @@ void WordleGameWindow::SetUpButtons()
 
 void WordleGameWindow::validateGuess(int start)
 {
-    string guess = string("");
+
+    string guess = "";
+    string word = this->words.getWord();
     int count = 0;
     for (int i = start; i < start + 5; i++ ) {
-        Fl_Box* value = this->values->at(i);
+
+        Fl_Box *value = this->values->at(i);
         auto letter = value->label();
-        string word = this->words.getWord();
+
+
+
         for(auto& c : word)
         {
         c = toupper(c);
@@ -131,49 +142,83 @@ void WordleGameWindow::validateGuess(int start)
         guess += letter;
         if (word.find(letter) != string::npos) {
             value->color(FL_YELLOW);
+            value->label(letter);
         }
         if (*letter == word[count]) {
+
             value->color(FL_GREEN);
+            value->label(letter);
         }
         }
         count++;
     }
-    if(guess == this->words.getWord())  {
+    //cout << word << endl;
+    //cout << guess << endl;
+    if (guess == word)  {
         cout << "YOU WON" << endl;
     }
 }
 
+void WordleGameWindow::GetWindow(WordleGameWindow* cwindow)
+{
+    window = cwindow;
+}
+
 int WordleGameWindow::keyhandler(int event) {
+    int result = 0;
+    //WordleGameWindow window = WordleGameWindow(500, 600, "wordle");
 
-    if (event == FL_SHORTCUT) {
+    if (event == FL_KEYUP)
+    {
+        cout << "hi" << endl;
+    }
+    else if (event == FL_SHORTCUT) {
 
-        if (Fl::event_key() == 'enter')
+        if (Fl::event_key() == 10)
         {
-            cout << Fl::event_text() << endl;
-            keyboardPressed;
-
-            return 1;
+            cout << "enter" << endl;
+            //keyboardPressed;
+            result = 1;
         }
-        else if (Fl::event_key() == 'backspace')
+        if (Fl::event_key() == FL_BackSpace)
         {
-            cout << 'back' << endl;
-
+            cout << "back" << endl;
+            window->DeleteLetter(window);
         }
         else
         {
-            cout << "back" << endl;
+            string value = Fl::event_text();
+            transform(value.begin(), value.end(), value.begin(), ::toupper);
+            for (int i = 0; i < 29; i++)
+            {
+                if (window->keyValues[i] == value)
+                {
+                    window->values->at(window->currentBox)->label(window->keyValues[i].c_str());
+                }
+            }
+            //const char* letter = value.c_str()[0];
+            //
+
+            //Fl_Box* box = window->values->at(window->currentBox + 1);
+            //box->label("");
+            window->currentBox += 1;
+            cout << std::toupper(value[0]) << endl;
+            return 1;
         }
     }
-    return 0;
+    //cout << Fl::event_key() << endl;
+    return result;
 }
 
 void WordleGameWindow::keyboardButtonClicked(Fl_Widget* widget, void* data)
 {
     WordleGameWindow* window = (WordleGameWindow*)data;
     Fl_Button *button = (Fl_Button*) widget;
+    //string value = button->label();
     window->SetBoxValue(button->label());
     window->currentBox += 1;
-    //cout << button->label() << endl;
+    //window->validateGuess(0);
+    cout << button->label() << endl;
 }
 
 void WordleGameWindow::keyboardPressed(Fl_Widget* widget, void* data)
@@ -186,12 +231,23 @@ void WordleGameWindow::keyboardPressed(Fl_Widget* widget, void* data)
 void WordleGameWindow::EnterButtonClicked(Fl_Widget* widget, void* data)
 {
     WordleGameWindow* window = (WordleGameWindow*)data;
+    window->validateGuess(0);
+    window->validateGuess(5);
+    window->validateGuess(10);
+    window->validateGuess(15);
+    window->validateGuess(20);
+    window->validateGuess(25);
 
 }
 
 void WordleGameWindow::BackspaceButtonClicked(Fl_Widget* widget, void* data)
 {
     WordleGameWindow* window = (WordleGameWindow*)data;
+    window->DeleteLetter(window);
+}
+
+void WordleGameWindow::DeleteLetter(WordleGameWindow* window)
+{
     if (window->currentBox > 0)
     {
         window->currentBox -= 1;
@@ -201,14 +257,10 @@ void WordleGameWindow::BackspaceButtonClicked(Fl_Widget* widget, void* data)
 
 void WordleGameWindow::SetBoxValue(const char* value)
 {
-    Fl_Box* box = this->values->at(this->currentBox);
+    Fl_Box* box = values->at(this->currentBox);
     box->label(value);
-    this->validateGuess(0);
-    this->validateGuess(5);
-    this->validateGuess(10);
-    this->validateGuess(15);
-    this->validateGuess(20);
-    this->validateGuess(25);
+    /*this->validateGuess(0);
+    */
 
 }
 
