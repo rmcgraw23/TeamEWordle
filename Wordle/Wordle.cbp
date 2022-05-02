@@ -15,6 +15,7 @@
 					<Add option="-g" />
 					<Add directory="View" />
 					<Add directory="./" />
+					<Add directory="Model" />
 				</Compiler>
 			</Target>
 		</Build>
@@ -26,6 +27,8 @@
 		</Linker>
 		<Unit filename="Model/FileReader.cpp" />
 		<Unit filename="Model/FileReader.h" />
+		<Unit filename="Model/User.cpp" />
+		<Unit filename="Model/User.h" />
 		<Unit filename="Model/Words.cpp" />
 		<Unit filename="Model/Words.h" />
 		<Unit filename="UserProfileWindow.cpp" />
