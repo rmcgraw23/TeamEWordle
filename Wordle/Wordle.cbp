@@ -23,6 +23,8 @@
 		<Linker>
 			<Add option="`fltk-config --ldstaticflags`" />
 		</Linker>
+		<Unit filename="Model/FileReader.cpp" />
+		<Unit filename="Model/FileReader.h" />
 		<Unit filename="Model/Words.cpp" />
 		<Unit filename="Model/Words.h" />
 		<Unit filename="View/WordleGameWindow.cpp" />
