@@ -54,9 +54,15 @@ class WordleGameWindow : public Fl_Window
         void SetUpButtons();
 
         static int keyhandler(int event);
-        static WordleGameWindow* window;
+        inline static WordleGameWindow* window;
         Words words;
         void validateGuess(int start);
+        void isValidWord();
+
+        Words* word;
+
+        void GetWindow(WordleGameWindow* cwindow);
+        void DeleteLetter(WordleGameWindow* window);
 
         Words* word;
 

@@ -2,6 +2,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cctype>
+#include <algorithm>
 
 namespace model
 {
@@ -27,7 +29,7 @@ vector<string> FileReader::readInText()
         {
           if(line.length() == 6)
           {
-
+              line.erase(std::remove_if(line.begin(), line.end(), ::isspace), line.end());
               words.push_back(line);
             }
           }
