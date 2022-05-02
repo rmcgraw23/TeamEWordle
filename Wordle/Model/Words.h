@@ -6,6 +6,11 @@
 
 using namespace std;
 
+#include "FileReader.h"
+
+namespace model
+{
+
 class Words
 {
     public:
@@ -26,5 +31,7 @@ class Words
         FileReader reader;
         void setRandomWord();
 };
+
+}
 
 #endif // WORDS_H
