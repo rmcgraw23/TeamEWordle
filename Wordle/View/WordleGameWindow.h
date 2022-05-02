@@ -35,6 +35,7 @@ class WordleGameWindow : public Fl_Window
         static const int HEIGHT_BUFFER = 50;
         static const int LETTERS_PER_ROW = 5;
         int currentBox = 0;
+        bool repeating = true;
 
         vector<Fl_Box*> *values;
         vector<Fl_Button*> *buttons;
@@ -62,6 +63,7 @@ class WordleGameWindow : public Fl_Window
 
         void GetWindow(WordleGameWindow* cwindow);
         void DeleteLetter(WordleGameWindow* window);
+        void resetBoard();
 
     public:
         WordleGameWindow(int width, int height, const char* title);
@@ -69,6 +71,7 @@ class WordleGameWindow : public Fl_Window
 
         static void keyboardButtonClicked(Fl_Widget* widget, void* data);
         static void keyboardPressed(Fl_Widget* widget, void* data);
+        static void repeatButtonClicked(Fl_Widget* widget, void* data);
         static void EnterButtonClicked(Fl_Widget* widget, void* data);
         static void BackspaceButtonClicked(Fl_Widget* widget, void* data);
         void SetBoxValue(const char* value);

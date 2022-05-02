@@ -10,9 +10,19 @@ Words::Words()
     this->guessCount = 0;
     this->word = "";
     this->reader = FileReader();
-    this->words = this->reader.readInText();
+    this->words = this->reader.readInText(true);
     this->setRandomWord();
 
+
+}
+
+Words::Words(bool repeating)
+{
+    this->guessCount = 0;
+    this->word = "";
+    this->reader = FileReader();
+    this->words = this->reader.readInText(repeating);
+    this->setRandomWord();
 
 }
 

@@ -15,6 +15,7 @@ class Words
 {
     public:
         Words();
+        Words(bool repeating);
         virtual ~Words();
         int getGuessCount();
         void setGuessCount(int count);

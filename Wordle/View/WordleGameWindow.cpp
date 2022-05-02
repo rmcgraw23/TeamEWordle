@@ -11,6 +11,8 @@ WordleGameWindow::WordleGameWindow(int width, int height, const char* title) : F
     this->LabelBuffer = new Fl_Box(100, 20, 50, 50);
     values = new vector<Fl_Box*>();
     buttons = new vector<Fl_Button*>();
+    Fl_Button* setting = new Fl_Button(400, 20, 100, 50 , "Repeat on");
+    setting->callback(repeatButtonClicked, this);
     this->SetUpLetters();
     #ifdef Level_1
     cout << this->words.getWord() << endl;
@@ -37,6 +39,7 @@ WordleGameWindow::~WordleGameWindow()
 {
     //dtor
 }
+
 
 void WordleGameWindow::SetUpLetters()
 {
@@ -266,6 +269,43 @@ int WordleGameWindow::keyhandler(int event) {
     return result;
 }
 
+void WordleGameWindow::repeatButtonClicked(Fl_Widget* widget, void* data)
+{
+    WordleGameWindow* window = (WordleGameWindow*)data;
+    Fl_Button *button = (Fl_Button*) widget;
+    if (window->repeating)
+    {
+        window->repeating = false;
+        button->label("Repeat off");
+        button->redraw();
+        window->words = new Words(true);
+        window->resetBoard();
+        #ifdef Level_1
+        cout << window->words.getWord() << endl;
+        #endif
+    } else {
+        window->repeating = true;
+        button->label("Repeat on");
+        window->words = new Words(false);
+        window->resetBoard();
+        #ifdef Level_1
+        cout << window->words.getWord() << endl;
+        #endif
+    }
+}
+
+
+void WordleGameWindow::resetBoard() {
+    this->currentBox = 0;
+    for (int i = 0; i < this->values->size(); i++ ) {
+        this->values->at(i)->label("");
+        this->values->at(i)->color(FL_WHITE);
+    }
+    for (int i = 0; i < this->buttons->size(); i++) {
+        this->buttons->at(i)->color(FL_GRAY);
+    }
+    this->redraw();
+}
 void WordleGameWindow::keyboardButtonClicked(Fl_Widget* widget, void* data)
 {
     WordleGameWindow* window = (WordleGameWindow*)data;

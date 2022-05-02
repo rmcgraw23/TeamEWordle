@@ -12,7 +12,8 @@ class FileReader
     public:
         FileReader();
         virtual ~FileReader();
-        vector<string> readInText();
+        vector<string> readInText(bool repeating);
+        bool isNotRepeating(string word);
 
     protected:
 
