@@ -25,7 +25,6 @@ WordleGameWindow::WordleGameWindow(int width, int height, const char* title) : F
     this->SetUpButtons();
     string result = "";
     end();
-    this->word = new Words();
     //Fl_Event_Handler event = new Fl_Event_Handler(keyhandler);
     //window = new WordleGameWindow(600, 500, "Wordle");
     this->GetWindow(this);
@@ -158,7 +157,7 @@ void WordleGameWindow::isValidWord() {
 
 void WordleGameWindow::validateGuess(int start)
 {
-    string guess = string("");
+    string guess = "";
     int count = 0;
     Fl_Button* button = this->buttons->at(4);
     for (int i = start; i < start + 5; i++ ) {
@@ -207,12 +206,13 @@ void WordleGameWindow::validateGuess(int start)
 
         }
         count++;
+        redraw();
+        if (guess == word)  {
+        cout << "YOU WON" << endl;
+    }
     }
     //cout << word << endl;
     //cout << guess << endl;
-    if (guess == word)  {
-        cout << "YOU WON" << endl;
-    }
 }
 
 void WordleGameWindow::GetWindow(WordleGameWindow* cwindow)
