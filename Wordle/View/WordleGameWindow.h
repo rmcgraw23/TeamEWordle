@@ -59,7 +59,6 @@ class WordleGameWindow : public Fl_Window
         void validateGuess(int start);
         void isValidWord();
 
-        Words* word;
 
         void GetWindow(WordleGameWindow* cwindow);
         void DeleteLetter(WordleGameWindow* window);

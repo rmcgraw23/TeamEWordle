@@ -5,6 +5,9 @@
 #include <cctype>
 #include <algorithm>
 
+namespace model
+{
+
 FileReader::FileReader()
 {
     //ctor
@@ -34,3 +37,5 @@ vector<string> FileReader::readInText()
         myfile.close();
         return words;
       }
+
+}
