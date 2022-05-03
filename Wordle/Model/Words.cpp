@@ -38,7 +38,7 @@ string Words::getWord()
 
 void Words::setGuessCount(int guesses)
 {
-    this->guessCount = guesses;
+    this->guessCount += guesses;
 }
 
 void Words::setWord(string word)

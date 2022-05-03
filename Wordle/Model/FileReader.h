@@ -4,6 +4,8 @@
 #include "string"
 using namespace std;
 
+#include "User.h"
+
 namespace model
 {
 
@@ -13,10 +15,12 @@ class FileReader
         FileReader();
         virtual ~FileReader();
         vector<string> readInText();
-
-    protected:
+        vector<User*> ReadInUsers();
 
     private:
+        void addToList(User user, vector<User*> userList);
+        User* setUserStatistics(vector<string> values);
+
 };
 
 }

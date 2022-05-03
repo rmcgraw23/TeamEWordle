@@ -29,12 +29,16 @@
 		<Unit filename="Model/FileReader.h" />
 		<Unit filename="Model/User.cpp" />
 		<Unit filename="Model/User.h" />
+		<Unit filename="Model/UserList.cpp" />
+		<Unit filename="Model/UserList.h" />
 		<Unit filename="Model/Words.cpp" />
 		<Unit filename="Model/Words.h" />
 		<Unit filename="UserProfileWindow.cpp" />
 		<Unit filename="UserProfileWindow.h" />
 		<Unit filename="View/WordleGameWindow.cpp" />
 		<Unit filename="View/WordleGameWindow.h" />
+		<Unit filename="View/WordleStartUpWindow.cpp" />
+		<Unit filename="View/WordleStartUpWindow.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

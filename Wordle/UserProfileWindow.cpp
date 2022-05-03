@@ -54,6 +54,11 @@ void UserProfileWindow::SetUpGuessLabels()
     }
 }
 
+void UserProfileWindow::setUser(User* user)
+{
+    this->user = user;
+}
+
 UserProfileWindow::~UserProfileWindow()
 {
     //dtor

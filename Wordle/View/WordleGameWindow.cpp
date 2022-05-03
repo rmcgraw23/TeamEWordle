@@ -15,13 +15,7 @@ WordleGameWindow::WordleGameWindow(int width, int height, const char* title) : F
     #ifdef Level_1
     cout << this->words.getWord() << endl;
     #endif
-    //this->FirstLetterOutput = new Fl_Output(115, 75, 50, 50);
-    //this->FirstLetterOutput = new Fl_Output(170, 75, 50, 50);
-    //this->FirstLetterOutput = new Fl_Output(225, 75, 50, 50);
-    //this->FirstLetterOutput = new Fl_Output(280, 75, 50, 50);
-    //this->FirstLetterOutput = new Fl_Output(335, 75, 50, 50);
-    //this->LetterOutputLabel->textsize(30);
-    //this->LetterOutputLabel->value(" A");
+
     this->SetUpButtons();
     string result = "";
     end();
@@ -31,11 +25,30 @@ WordleGameWindow::WordleGameWindow(int width, int height, const char* title) : F
     Fl::add_handler(keyhandler);
     //this->buttons->at(19)->callback(EnterButtonClicked, this);
     //this->buttons->at(19)->when(FL_WHEN_ENTER_KEY_ALWAYS);
+    this->user = new User("fred");
 }
 
 WordleGameWindow::~WordleGameWindow()
 {
     //dtor
+}
+
+void WordleGameWindow::SetUpUser(const string& name)
+{
+    this->userList = new UserList();
+    for (int i = 0; i < this->userList->getUsers().size(); i++)
+    {
+        if (this->userList->getUsers()[i]->getName() == name)
+        {
+            this->user = this->userList->getUsers()[i];
+        }
+        else
+        {
+            this->user = new User(name);
+            this->userList->addUser(this->user);
+
+        }
+    }
 }
 
 void WordleGameWindow::SetUpLetters()
@@ -207,12 +220,41 @@ void WordleGameWindow::validateGuess(int start)
         }
         count++;
         redraw();
-        if (guess == word)  {
+        this->word->setGuessCount(1);
+        UserProfileWindow* window = new UserProfileWindow(300, 200, "User Statistics");
+        window->setUser(this->user);
+        if (guess == word)
+        {
         cout << "YOU WON" << endl;
+        this->UpdateUserForWin(this->word->getGuessCount());
+        window->show();
+        }
+        else if (this->word->getGuessCount() == 6)
+        {
+            this->UpdateUserForloss();
+            window->show();
+        }
     }
+}
+
+void WordleGameWindow::UpdateUserForWin(int position)
+{
+    this->user->setGamesPlayed(this->user->getGamesPlayed() + 1);
+    this->user->setWinPercentage(this->user->getTotalGuesses() / this->user->getGamesPlayed());
+    this->user->setWinStreak(this->user->getWinStreak() + 1);
+    if (this->user->getWinStreak() > this->user->getMaxWinStreak())
+    {
+        this->user->setMaxWinStreak(this->user->getWinStreak());
     }
-    //cout << word << endl;
-    //cout << guess << endl;
+    this->user->setOneGuessAmount(position, 1);
+
+}
+
+void WordleGameWindow::UpdateUserForloss()
+{
+    this->user->setGamesPlayed(this->user->getGamesPlayed() + 1);
+    this->user->setWinPercentage(this->user->getTotalGuesses() / this->user->getGamesPlayed());
+    this->user->setWinStreak(0);
 }
 
 void WordleGameWindow::GetWindow(WordleGameWindow* cwindow)

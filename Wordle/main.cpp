@@ -10,7 +10,7 @@
 using namespace std;
 
 #include "WordleGameWindow.h"
-#include "UserProfileWindow.h"
+#include "WordleStartUpWindow.h"
 using namespace View;
 
 char getvalue() {
@@ -39,10 +39,10 @@ int main (int argc, char ** argv)
   Fl_Box *box;
 
   WordleGameWindow mainWindow(500, 600, "Wordle");
-  mainWindow.show();
+  //mainWindow.show();
 
-  UserProfileWindow userWindow(300, 200, "User");
-  userWindow.show();
+  WordleStartUpWindow startWindow(400, 300, "Main Menu");
+  startWindow.show();
 
   window = new Fl_Window (300, 180);
   box = new Fl_Box (20, 40, 260, 100, "Hello World!");

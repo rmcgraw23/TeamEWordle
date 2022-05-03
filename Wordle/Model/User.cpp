@@ -41,6 +41,15 @@ vector<int> User::getguesses()
     return this->guessValues;
 }
 
+int User::getTotalGuesses()
+{
+    int total = 0;
+    for (int i = 0; i < this->guessValues.size(); i++)
+    {
+        total += this->guessValues[i];
+    }
+}
+
 void User::setName(string const& name)
 {
     this->name = name;
@@ -51,9 +60,10 @@ void User::setGamesPlayed(int gamesPlayed)
     this->gamesPlayed = gamesPlayed;
 }
 
-void User::setWinPercentage(int wins)
+void User::setWinPercentage(int winPercent)
 {
-    this->winPercent = (wins / this->gamesPlayed) * 100;
+    this->winPercent = winPercent;
+    //this->winPercent = (wins / this->gamesPlayed) * 100;
 }
 
 void User::setWinStreak(int winStreak)
@@ -63,12 +73,18 @@ void User::setWinStreak(int winStreak)
 
 void User::setMaxWinStreak(int maxWinStreak)
 {
-    this->maxWinStreak;
+    this->maxWinStreak = maxWinStreak;
 }
 
-void User::setGuessAmount(int guessCount, int amount)
+void User::setGuessAmount(vector<int> guesses)
 {
-    this->guessValues.at(amount) = guessCount;
+    this->guessValues = guesses;
+    //this->guessValues.at(amount) = guessCount;
+}
+
+void User::setOneGuessAmount(int position, int guess)
+{
+    this->guessValues.at(position) = this->guessValues.at(position) + guess;
 }
 
 User::~User()

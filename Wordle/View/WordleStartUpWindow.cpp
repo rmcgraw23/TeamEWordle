@@ -14,6 +14,8 @@ WordleStartUpWindow::WordleStartUpWindow(int width, int height, const char* titl
     this->StartButton = new Fl_Button(145, 225, 100, 30, "Start Game");
     this->StartButton->callback(HandleStart, this);
     this->end();
+
+    this->username = "";
 }
 
 void WordleStartUpWindow::HandleSettings(Fl_Widget* widget, void* data)
@@ -24,8 +26,11 @@ void WordleStartUpWindow::HandleSettings(Fl_Widget* widget, void* data)
 void WordleStartUpWindow::HandleStart(Fl_Widget* widget, void* data)
 {
     WordleStartUpWindow* window = (WordleStartUpWindow*)data;
+    window->username = window->NameInput->value();
     window->mainWindow = new WordleGameWindow(500, 600, "Wordle");
+    window->mainWindow->SetUpUser(window->username);
     window->mainWindow->show();
+    window->hide();
 }
 
 WordleStartUpWindow::~WordleStartUpWindow()

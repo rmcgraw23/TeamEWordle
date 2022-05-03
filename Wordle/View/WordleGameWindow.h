@@ -22,7 +22,11 @@
 using namespace std;
 
 #include <../Model/Words.h>
+#include<User.h>
+#include<UserList.h>
 using namespace model;
+
+#include "../UserProfileWindow.h"
 
 namespace View {
 
@@ -65,6 +69,12 @@ class WordleGameWindow : public Fl_Window
 
         Words* word;
 
+        User* user;
+        UserList* userList;
+
+        void UpdateUserForloss();
+        void UpdateUserForWin(int position);
+
     public:
         WordleGameWindow(int width, int height, const char* title);
         virtual ~WordleGameWindow();
@@ -74,6 +84,8 @@ class WordleGameWindow : public Fl_Window
         static void EnterButtonClicked(Fl_Widget* widget, void* data);
         static void BackspaceButtonClicked(Fl_Widget* widget, void* data);
         void SetBoxValue(const char* value);
+        void SetUpUser(const string& name);
+
 
 };
 

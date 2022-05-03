@@ -12,6 +12,9 @@
 #include <vector>
 using namespace std;
 
+#include "User.h"
+using namespace model;
+
 namespace View{
 
 class UserProfileWindow : public Fl_Window
@@ -40,9 +43,13 @@ class UserProfileWindow : public Fl_Window
         int CurrentObject;
         int GuessCount;
 
+        User* user;
+
     public:
         UserProfileWindow(int width, int height, const char* title);
         virtual ~UserProfileWindow();
+
+        void setUser(User* user);
 
 };
 

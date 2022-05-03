@@ -32,6 +32,8 @@ class WordleStartUpWindow : public Fl_Window
 
         WordleGameWindow *mainWindow;
 
+        string username;
+
     public:
         WordleStartUpWindow(int width, int height, const char* title);
         virtual ~WordleStartUpWindow();

@@ -19,6 +19,7 @@ class User
 
     public:
         User(const string& name);
+
         virtual ~User();
 
         string getName();
@@ -30,10 +31,13 @@ class User
 
         void setName(string const& name);
         void setGamesPlayed(int gamesPlayed);
-        void setWinPercentage(int wins);
+        void setWinPercentage(int winPercent);
         void setWinStreak(int winStreak);
         void setMaxWinStreak(int maxWinstreak);
-        void setGuessAmount(int guessCount, int amount);
+        void setGuessAmount(vector<int> guesses);
+
+        int getTotalGuesses();
+        void setOneGuessAmount(int positon, int guess);
 
 };
 
