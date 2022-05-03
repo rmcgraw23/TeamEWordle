@@ -15,12 +15,16 @@ class Words
 {
     public:
         Words();
+        Words(bool repeating);
         virtual ~Words();
         int getGuessCount();
         void setGuessCount(int count);
         string getWord();
         vector<string> getWords();
         void setWord(string word);
+        void setWords(vector<string> words);
+        void setRandomWord();
+
 
     protected:
 
@@ -29,7 +33,6 @@ class Words
         string word;
         vector<string> words;
         FileReader reader;
-        void setRandomWord();
 };
 
 }

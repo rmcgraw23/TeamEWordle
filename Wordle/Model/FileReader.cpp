@@ -18,7 +18,7 @@ FileReader::~FileReader()
     //dtor
 }
 
-vector<string> FileReader::readInText()
+vector<string> FileReader::readInText(bool repeating)
 {
       vector<string> words;
       string line;
@@ -30,7 +30,13 @@ vector<string> FileReader::readInText()
           if(line.length() == 6)
           {
               line.erase(std::remove_if(line.begin(), line.end(), ::isspace), line.end());
+              if (!repeating) {
+                if(isNotRepeating(line)) {
+                    words.push_back(line);
+                }
+              } else {
               words.push_back(line);
+              }
             }
           }
         }
@@ -38,4 +44,20 @@ vector<string> FileReader::readInText()
         return words;
       }
 
+bool FileReader::isNotRepeating(string word) {
+    for (int i = 0, j = word.size(); i < j; i++)
+   {
+      for (int k = i+1; k < j; k++)
+      {
+         if (word[i] == word[k])
+         {
+            return false;
+         }
+
+      }
+   }
+   return true;
 }
+
+}
+
