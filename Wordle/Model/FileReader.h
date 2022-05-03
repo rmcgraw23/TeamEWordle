@@ -4,6 +4,9 @@
 #include "string"
 using namespace std;
 
+#include "User.h"
+using namespace model;
+
 namespace model
 {
 
@@ -13,11 +16,13 @@ public:
     FileReader();
     virtual ~FileReader();
     vector<string> readInText(bool repeating);
+    vector<User*> ReadInUsers();
 
 protected:
 
 private:
     bool isNotRepeating(string word);
+    User* setUserStatistics(vector<string> values);
 };
 
 }

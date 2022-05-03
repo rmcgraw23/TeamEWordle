@@ -228,7 +228,7 @@ void WordleGameWindow::validateGuess(int start)
         }
         count++;
         redraw();
-        if (guess == word)
+        /*if (guess == word)
         {
             switch ( fl_choice("You Won! Would you like to play again?", "No", "Yes", 0) )
             {
@@ -249,13 +249,47 @@ void WordleGameWindow::validateGuess(int start)
                 this->words.setRandomWord();
                 this->resetBoard();
             }
+        }*/
+
+        this->word->setGuessCount(1);
+
+
+        if (guess == word)
+        {
+            cout << "YOU WON" << endl;
+            this->UpdateUserForWin(this->words.getGuessCount());
+            UserProfileWindow* window = new UserProfileWindow(300, 200, "User Statistics", this->user);
+            window->show();
+            //window->setUser(this->user);
         }
-
+        else if (this->word->getGuessCount() == 6)
+        {
+            this->UpdateUserForloss();
+            UserProfileWindow* window = new UserProfileWindow(300, 200, "User Statistics", this->user);
+            window->show();
+            //window->setUser(this->user);
+        }
     }
+}
 
+void WordleGameWindow::UpdateUserForWin(int position)
+{
+    this->user->setGamesPlayed(this->user->getGamesPlayed() + 1);
+    this->user->setWinStreak(this->user->getWinStreak() + 1);
+    if (this->user->getWinStreak() > this->user->getMaxWinStreak())
+    {
+        this->user->setMaxWinStreak(this->user->getWinStreak());
+    }
+    this->user->setOneGuessAmount(position, 1);
+    this->user->setWinPercentage((this->user->getTotalGuesses() / this->user->getGamesPlayed()) * 100);
 
-    //cout << word << endl;
-    //cout << guess << endl;
+}
+
+void WordleGameWindow::UpdateUserForloss()
+{
+    this->user->setGamesPlayed(this->user->getGamesPlayed() + 1);
+    this->user->setWinPercentage(this->user->getTotalGuesses() / this->user->getGamesPlayed());
+    this->user->setWinStreak(0);
 }
 
 void WordleGameWindow::changeButtonColor(Fl_Color color, const char* letter)

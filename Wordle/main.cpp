@@ -11,6 +11,7 @@ using namespace std;
 
 #include "WordleGameWindow.h"
 #include "UserProfileWindow.h"
+#include "WordleStartUpWindow.h"
 using namespace View;
 
 char getvalue() {
@@ -38,8 +39,8 @@ int main (int argc, char ** argv)
   Fl_Window *window;
   Fl_Box *box;
 
-  WordleGameWindow mainWindow(500, 600, "Wordle by Mcgraw and Thompson");
-  mainWindow.show();
+  WordleGameWindow mainWindow(500, 600, "Wordle by McGraw and Thompson");
+  //mainWindow.show();
 
   WordleStartUpWindow startWindow(400, 300, "Main Menu");
   startWindow.show();

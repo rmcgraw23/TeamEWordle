@@ -44,12 +44,14 @@ class UserProfileWindow : public Fl_Window
         int GuessCount;
 
         User* user;
+        vector<string> values;
 
     public:
-        UserProfileWindow(int width, int height, const char* title);
+        UserProfileWindow(int width, int height, const char* title, User* user);
         virtual ~UserProfileWindow();
 
         void setUser(User* user);
+        void updateOutputValues();
 
 };
 
