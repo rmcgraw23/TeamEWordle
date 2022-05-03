@@ -14,8 +14,14 @@ class FileReader
     public:
         FileReader();
         virtual ~FileReader();
-        vector<string> readInText();
+
+ 		vector<string> readInText();
         vector<User*> ReadInUsers();
+        
+        vector<string> readInText(bool repeating);
+        bool isNotRepeating(string word);
+
+    protected:
 
     private:
         void addToList(User user, vector<User*> userList);

@@ -37,7 +37,7 @@
 	<UserList.h>
 	"../UserProfileWindow.h"
 
-1651433938 source:/home/mthomp35/TeamEWordle/Wordle/main.cpp
+1651513660 source:/home/mthomp35/TeamEWordle/Wordle/main.cpp
 	<FL/Fl.H>
 	<FL/Fl_Window.H>
 	<FL/Fl_Box.H>
@@ -46,8 +46,9 @@
 	<unistd.h>
 	<termios.h>
 	"WordleGameWindow.h"
+	"UserProfileWindow.h"
 
-1651435393 /home/mthomp35/TeamEWordle/Wordle/View/WordleGameWindow.h
+1651553271 /home/mthomp35/TeamEWordle/Wordle/View/WordleGameWindow.h
 	<FL/Fl.H>
 	<FL/Fl_Window.H>
 	<FL/Fl_Group.H>
@@ -67,18 +68,20 @@
 	<cstring>
 	<../Model/Words.h>
 
-1651436692 source:/home/mthomp35/TeamEWordle/Wordle/View/WordleGameWindow.cpp
+1651553647 source:/home/mthomp35/TeamEWordle/Wordle/View/WordleGameWindow.cpp
 	"WordleGameWindow.h"
 	<algorithm>
+	"FileReader.h"
 
-1651433938 source:/home/mthomp35/TeamEWordle/Wordle/Model/Words.cpp
+1651553733 source:/home/mthomp35/TeamEWordle/Wordle/Model/Words.cpp
 	"Words.h"
 	<stdlib.h>
 	<iostream>
 
-1651433938 /home/mthomp35/TeamEWordle/Wordle/Model/Words.h
+1651553714 /home/mthomp35/TeamEWordle/Wordle/Model/Words.h
 	<string>
 	<vector>
+	"FileReader.h"
 	"FileReader.h"
 
 1650594989 source:/home/mthomp35/TeamEWordle/Wordle/IO/FileReader.cpp
@@ -91,7 +94,7 @@
 	"vector"
 	"string"
 
-1651433938 source:/home/mthomp35/TeamEWordle/Wordle/Model/FileReader.cpp
+1651514550 source:/home/mthomp35/TeamEWordle/Wordle/Model/FileReader.cpp
 	"FileReader.h"
 	<iostream>
 	<fstream>
@@ -99,7 +102,7 @@
 	<cctype>
 	<algorithm>
 
-1651433938 /home/mthomp35/TeamEWordle/Wordle/Model/FileReader.h
+1651514561 /home/mthomp35/TeamEWordle/Wordle/Model/FileReader.h
 	"vector"
 	"string"
 
@@ -173,4 +176,40 @@
 	<vector>
 	"User.h"
 	"FileReader.h"
+
+1651513660 /home/mthomp35/TeamEWordle/Wordle/UserProfileWindow.h
+	<FL/Fl.H>
+	<FL/Fl_Window.H>
+	<FL/Fl_Text_Display.H>
+	<FL/Fl_Output.H>
+	<FL/Fl_Button.H>
+	<FL/Fl_Box.H>
+	<string>
+	<vector>
+
+1651513660 source:/home/mthomp35/TeamEWordle/Wordle/Model/User.cpp
+	"User.h"
+
+1651513660 /home/mthomp35/TeamEWordle/Wordle/Model/User.h
+	<string>
+	<vector>
+
+1651513660 source:/home/mthomp35/TeamEWordle/Wordle/UserProfileWindow.cpp
+	"UserProfileWindow.h"
+
+1651513660 source:/home/mthomp35/TeamEWordle/Wordle/View/WordleStartUpWindow.cpp
+	"WordleStartUpWindow.h"
+
+1651513660 /home/mthomp35/TeamEWordle/Wordle/View/WordleStartUpWindow.h
+	<FL/Fl.H>
+	<FL/Fl_Window.H>
+	<FL/Fl_Text_Display.H>
+	<FL/Fl_Output.H>
+	<FL/Fl_Button.H>
+	<FL/Fl_Box.H>
+	<FL/Fl_Input.H>
+	<string>
+	<vector>
+	<../Model/Words.h>
+	"WordleGameWindow.h"
 

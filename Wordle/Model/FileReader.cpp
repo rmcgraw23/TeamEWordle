@@ -83,6 +83,20 @@ User* FileReader::setUserStatistics(vector<string> values)
 void FileReader::addToList(User user, vector<User*> userList)
 {
 
+
+bool FileReader::isNotRepeating(string word) {
+    for (int i = 0, j = word.size(); i < j; i++)
+   {
+      for (int k = i+1; k < j; k++)
+      {
+         if (word[i] == word[k])
+         {
+            return false;
+         }
+
+      }
+   }
+   return true;
+}
 }
 
-}
