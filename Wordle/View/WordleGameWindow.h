@@ -64,7 +64,8 @@ class WordleGameWindow : public Fl_Window
         inline static WordleGameWindow* window;
         Words words;
         void validateGuess(int start);
-        bool isValidWord();
+        bool isValidWord(int start);
+        void enableButtons();
 
 
         void GetWindow(WordleGameWindow* cwindow);
@@ -79,6 +80,7 @@ class WordleGameWindow : public Fl_Window
 
         void UpdateUserForloss();
         void UpdateUserForWin(int position);
+        void disableEnterButton();
 
     public:
         WordleGameWindow(int width, int height, const char* title);
