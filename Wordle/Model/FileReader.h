@@ -4,29 +4,20 @@
 #include "string"
 using namespace std;
 
-#include "User.h"
-
 namespace model
 {
 
 class FileReader
 {
-    public:
-        FileReader();
-        virtual ~FileReader();
+public:
+    FileReader();
+    virtual ~FileReader();
+    vector<string> readInText(bool repeating);
 
- 		vector<string> readInText();
-        vector<User*> ReadInUsers();
-        
-        vector<string> readInText(bool repeating);
-        bool isNotRepeating(string word);
+protected:
 
-    protected:
-
-    private:
-        void addToList(User user, vector<User*> userList);
-        User* setUserStatistics(vector<string> values);
-
+private:
+    bool isNotRepeating(string word);
 };
 
 }

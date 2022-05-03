@@ -11,6 +11,7 @@
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Input.H>
+#include <FL/fl_ask.H>
 #include "../Model/Words.h"
 
 #include <string>
@@ -63,12 +64,13 @@ class WordleGameWindow : public Fl_Window
         inline static WordleGameWindow* window;
         Words words;
         void validateGuess(int start);
-        void isValidWord();
+        bool isValidWord();
 
 
         void GetWindow(WordleGameWindow* cwindow);
         void DeleteLetter(WordleGameWindow* window);
         void resetBoard();
+        void changeButtonColor(Fl_Color color, const char* letter);
 
         Words* word;
 
