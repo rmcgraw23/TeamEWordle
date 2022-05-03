@@ -9,15 +9,15 @@ namespace model
 
 class FileReader
 {
-    public:
-        FileReader();
-        virtual ~FileReader();
-        vector<string> readInText(bool repeating);
-        bool isNotRepeating(string word);
+public:
+    FileReader();
+    virtual ~FileReader();
+    vector<string> readInText(bool repeating);
 
-    protected:
+protected:
 
-    private:
+private:
+    bool isNotRepeating(string word);
 };
 
 }

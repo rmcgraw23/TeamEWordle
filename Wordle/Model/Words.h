@@ -13,26 +13,25 @@ namespace model
 
 class Words
 {
-    public:
-        Words();
-        Words(bool repeating);
-        virtual ~Words();
-        int getGuessCount();
-        void setGuessCount(int count);
-        string getWord();
-        vector<string> getWords();
-        void setWord(string word);
-        void setWords(vector<string> words);
-        void setRandomWord();
+public:
+    Words();
+    virtual ~Words();
+    int getGuessCount();
+    void setGuessCount(int count);
+    string getWord();
+    vector<string> getWords();
+    void setWord(string word);
+    void setWords(vector<string> words);
+    void setRandomWord();
 
 
-    protected:
+protected:
 
-    private:
-        int guessCount;
-        string word;
-        vector<string> words;
-        FileReader reader;
+private:
+    int guessCount;
+    string word;
+    vector<string> words;
+    FileReader reader;
 };
 
 }

@@ -1,10 +1,14 @@
 #include "WordleGameWindow.h"
 #include <algorithm>
 #include "FileReader.h"
+#include <stdlib.h>
 #define Level_1
 
-namespace View {
-
+namespace View
+{
+/**
+*Constructor for the wordle game window
+*/
 WordleGameWindow::WordleGameWindow(int width, int height, const char* title) : Fl_Window(width, height, title)
 {
     begin();
@@ -12,13 +16,13 @@ WordleGameWindow::WordleGameWindow(int width, int height, const char* title) : F
     this->LabelBuffer = new Fl_Box(100, 20, 50, 50);
     values = new vector<Fl_Box*>();
     buttons = new vector<Fl_Button*>();
-    Fl_Button* setting = new Fl_Button(400, 20, 100, 50 , "Repeat on");
+    Fl_Button* setting = new Fl_Button(400, 20, 100, 50, "Repeat on");
     setting->callback(repeatButtonClicked, this);
     this->SetUpLetters();
     this->reader = FileReader();
-    #ifdef Level_1
+#ifdef Level_1
     cout << this->words.getWord() << endl;
-    #endif
+#endif
     //this->FirstLetterOutput = new Fl_Output(115, 75, 50, 50);
     //this->FirstLetterOutput = new Fl_Output(170, 75, 50, 50);
     //this->FirstLetterOutput = new Fl_Output(225, 75, 50, 50);
@@ -37,6 +41,9 @@ WordleGameWindow::WordleGameWindow(int width, int height, const char* title) : F
     //this->buttons->at(19)->when(FL_WHEN_ENTER_KEY_ALWAYS);
 }
 
+/**
+*Destructor for the wordle game window
+*/
 WordleGameWindow::~WordleGameWindow()
 {
     //dtor
@@ -129,15 +136,16 @@ void WordleGameWindow::SetUpButtons()
 
     }
 }
-
-void WordleGameWindow::isValidWord() {
+bool WordleGameWindow::isValidWord()
+{
     Fl_Box* value5 = this->values->at(4);
     Fl_Box* value1 = this->values->at(0);
     Fl_Box* value2 = this->values->at(1);
     Fl_Box* value3 = this->values->at(2);
     Fl_Box* value4 = this->values->at(3);
     auto letter = value5->label();
-    if (letter != nullptr){
+    if (letter != nullptr)
+    {
         string guess = string("");
         guess += value1->label();
         guess += value2->label();
@@ -146,15 +154,18 @@ void WordleGameWindow::isValidWord() {
         guess += value5->label();
         for(auto& c : guess)
         {
-        c = tolower(c);
+            c = tolower(c);
         }
         cout << guess << endl;
         vector<string> gameWords = words.getWords();
-    if(std::find(gameWords.begin(), gameWords.end(), guess) != gameWords.end()) {
-    cout << "valid" <<endl;
-    } else {
-    cout << "invalid" <<endl;
-    }
+        if(std::find(gameWords.begin(), gameWords.end(), guess) != gameWords.end())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
 
 
     }
@@ -164,59 +175,80 @@ void WordleGameWindow::validateGuess(int start)
 {
     string guess = "";
     int count = 0;
-    for (int i = start; i < start + 5; i++ ) {
+    for (int i = start; i < start + 5; i++ )
+    {
         Fl_Box* value = this->values->at(i);
         Fl_Button* button;
         auto letter = value->label();
         string word = this->words.getWord();
         for(auto& c : word)
         {
-        c = toupper(c);
+            c = toupper(c);
         }
-        if (letter != nullptr) {
+        if (letter != nullptr)
+        {
 
-        guess += letter;
-         for (int i = 0; i < this->buttons->size(); i++ ) {
-            button = this->buttons->at(i);
-            const char* buttonLetter = button->label();
-            if (buttonLetter == letter) {
-                 button->color(FL_DARK2);
-            }
-            }
-        if (word.find(letter) != string::npos) {
-            value->color(FL_YELLOW);
-            for (int i = 0; i < this->buttons->size(); i++ ) {
-            button = this->buttons->at(i);
-            const char* buttonLetter = button->label();
-            if (buttonLetter == letter) {
-                 button->color(FL_YELLOW);
-            }
-            }
+            guess += letter;
+            changeButtonColor(FL_DARK2, letter);
+            if (word.find(letter) != string::npos)
+            {
+                value->color(FL_YELLOW);
+                this->changeButtonColor(FL_YELLOW, letter);
 
-            value->label(letter);
-        }
-        if (*letter == word[count]) {
+                value->label(letter);
+            }
+            if (*letter == word[count])
+            {
 
-            value->color(FL_GREEN);
-            for (int i = 0; i < this->buttons->size(); i++ ) {
-            button = this->buttons->at(i);
-            const char* buttonLetter = button->label();
-            if (buttonLetter == letter) {
-                 button->color(FL_GREEN);
+                value->color(FL_GREEN);
+                this->changeButtonColor(FL_GREEN, letter);
+                value->label(letter);
             }
-            }
-            value->label(letter);
-        }
 
         }
         count++;
         redraw();
-        if (guess == word)  {
-        cout << "YOU WON" << endl;
+        if (guess == word)
+        {
+            switch ( fl_choice("You Won! Would you like to play again?", "No", "Yes", 0) )
+            {
+            case 0:
+                exit(3);
+            case 1:
+                this->words.setRandomWord();
+                this->resetBoard();
+            }
+        }
+        else if (this->words.getGuessCount() == 5)
+        {
+            switch ( fl_choice("You Lost! Would you like to play again?", "No", "Yes", 0) )
+            {
+            case 0:
+                exit(3);
+            case 1:
+                this->words.setRandomWord();
+                this->resetBoard();
+            }
+        }
+
     }
-    }
+
+
     //cout << word << endl;
     //cout << guess << endl;
+}
+
+void WordleGameWindow::changeButtonColor(Fl_Color color, const char* letter)
+{
+    for (int i = 0; i < this->buttons->size(); i++ )
+    {
+        Fl_Button* button = this->buttons->at(i);
+        const char* buttonLetter = button->label();
+        if (buttonLetter == letter)
+        {
+            button->color(color);
+        }
+    }
 }
 
 void WordleGameWindow::GetWindow(WordleGameWindow* cwindow)
@@ -224,7 +256,8 @@ void WordleGameWindow::GetWindow(WordleGameWindow* cwindow)
     window = cwindow;
 }
 
-int WordleGameWindow::keyhandler(int event) {
+int WordleGameWindow::keyhandler(int event)
+{
     int result = 0;
     //WordleGameWindow window = WordleGameWindow(500, 600, "wordle");
 
@@ -232,7 +265,8 @@ int WordleGameWindow::keyhandler(int event) {
     {
         cout << "hi" << endl;
     }
-    else if (event == FL_SHORTCUT) {
+    else if (event == FL_SHORTCUT)
+    {
 
         if (Fl::event_key() == 10)
         {
@@ -270,6 +304,12 @@ int WordleGameWindow::keyhandler(int event) {
     return result;
 }
 
+/**
+*The callback for clicking the repeating letter button.
+*
+*@param widget the the callback is being called on
+*@param data the window of the widget
+*/
 void WordleGameWindow::repeatButtonClicked(Fl_Widget* widget, void* data)
 {
     WordleGameWindow* window = (WordleGameWindow*)data;
@@ -284,35 +324,47 @@ void WordleGameWindow::repeatButtonClicked(Fl_Widget* widget, void* data)
         window->words.setRandomWord();
         window->resetBoard();
 
-        #ifdef Level_1
+#ifdef Level_1
         cout << window->words.getWord() << endl;
-        #endif
-    } else {
+#endif
+    }
+    else
+    {
         window->repeating = true;
         button->label("Repeat on");
-         vector<string> list = window->reader.readInText(true);
+        vector<string> list = window->reader.readInText(true);
         window->words.setWords(list);
         window->words.setRandomWord();
         window->resetBoard();
 
-        #ifdef Level_1
+#ifdef Level_1
         cout << window->words.getWord() << endl;
-        #endif
+#endif
     }
 }
 
 
-void WordleGameWindow::resetBoard() {
+void WordleGameWindow::resetBoard()
+{
     this->currentBox = 0;
-    for (int i = 0; i < this->values->size(); i++ ) {
-        this->values->at(i)->label("");
+    for (int i = 0; i < this->values->size(); i++ )
+    {
+        this->values->at(i)->label(nullptr);
         this->values->at(i)->color(FL_WHITE);
     }
-    for (int i = 0; i < this->buttons->size(); i++) {
+    for (int i = 0; i < this->buttons->size(); i++)
+    {
         this->buttons->at(i)->color(FL_GRAY);
     }
     this->redraw();
 }
+
+/**
+*The callback for clicking a keyboard button.
+*
+*@param widget the the callback is being called on
+*@param data the window of the widget
+*/
 void WordleGameWindow::keyboardButtonClicked(Fl_Widget* widget, void* data)
 {
     WordleGameWindow* window = (WordleGameWindow*)data;
@@ -324,6 +376,13 @@ void WordleGameWindow::keyboardButtonClicked(Fl_Widget* widget, void* data)
     cout << button->label() << endl;
 }
 
+
+/**
+*The callback for pressing a keyboard press
+*
+*@param widget the the callback is being called on
+*@param data the window of the widget
+*/
 void WordleGameWindow::keyboardPressed(Fl_Widget* widget, void* data)
 {
     WordleGameWindow* window = (WordleGameWindow*)data;
@@ -331,18 +390,35 @@ void WordleGameWindow::keyboardPressed(Fl_Widget* widget, void* data)
     window->SetBoxValue("y");
 }
 
+/**
+*The callback for clicking the enter button.
+*
+*@param widget the the callback is being called on
+*@param data the window of the widget
+*/
 void WordleGameWindow::EnterButtonClicked(Fl_Widget* widget, void* data)
 {
     WordleGameWindow* window = (WordleGameWindow*)data;
-    window->validateGuess(0);
-    window->validateGuess(5);
-    window->validateGuess(10);
-    window->validateGuess(15);
-    window->validateGuess(20);
-    window->validateGuess(25);
+    if (window->isValidWord())
+    {
+        window->validateGuess(0);
+        window->validateGuess(5);
+        window->validateGuess(10);
+        window->validateGuess(15);
+        window->validateGuess(20);
+        window->validateGuess(25);
+        window->words.setGuessCount(window->words.getGuessCount() + 1);
+    }
 
 }
 
+
+/**
+*The callback for clicking the Backspace button.
+*
+*@param widget the the callback is being called on
+*@param data the window of the widget
+*/
 void WordleGameWindow::BackspaceButtonClicked(Fl_Widget* widget, void* data)
 {
     WordleGameWindow* window = (WordleGameWindow*)data;
@@ -355,9 +431,15 @@ void WordleGameWindow::DeleteLetter(WordleGameWindow* window)
     {
         window->currentBox -= 1;
     }
-    window->values->at(window->currentBox)->label("");
+    window->values->at(window->currentBox)->label(nullptr);
 }
 
+/**
+*Sets the current box value to the associated value
+*
+*@param value the value to set the box too
+*
+*/
 void WordleGameWindow::SetBoxValue(const char* value)
 {
     Fl_Box* box = values->at(this->currentBox);
