@@ -36,6 +36,7 @@ class WordleGameWindow : public Fl_Window
         static const int LETTERS_PER_ROW = 5;
         int currentBox = 0;
         bool repeating = true;
+        FileReader reader;
 
         vector<Fl_Box*> *values;
         vector<Fl_Button*> *buttons;

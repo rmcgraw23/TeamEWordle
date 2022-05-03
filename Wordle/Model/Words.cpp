@@ -56,6 +56,10 @@ void Words::setWord(string word)
     this->word = word;
 }
 
+void Words::setWords(vector<string> words) {
+    this->words = words;
+}
+
 void Words::setRandomWord()
 {
     srand(time(0));

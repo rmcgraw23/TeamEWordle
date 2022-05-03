@@ -44,7 +44,7 @@
 	"WordleGameWindow.h"
 	"UserProfileWindow.h"
 
-1651515970 /home/mthomp35/TeamEWordle/Wordle/View/WordleGameWindow.h
+1651553271 /home/mthomp35/TeamEWordle/Wordle/View/WordleGameWindow.h
 	<FL/Fl.H>
 	<FL/Fl_Window.H>
 	<FL/Fl_Group.H>
@@ -64,16 +64,17 @@
 	<cstring>
 	<../Model/Words.h>
 
-1651515339 source:/home/mthomp35/TeamEWordle/Wordle/View/WordleGameWindow.cpp
+1651553647 source:/home/mthomp35/TeamEWordle/Wordle/View/WordleGameWindow.cpp
 	"WordleGameWindow.h"
 	<algorithm>
+	"FileReader.h"
 
-1651515609 source:/home/mthomp35/TeamEWordle/Wordle/Model/Words.cpp
+1651553733 source:/home/mthomp35/TeamEWordle/Wordle/Model/Words.cpp
 	"Words.h"
 	<stdlib.h>
 	<iostream>
 
-1651514855 /home/mthomp35/TeamEWordle/Wordle/Model/Words.h
+1651553714 /home/mthomp35/TeamEWordle/Wordle/Model/Words.h
 	<string>
 	<vector>
 	"FileReader.h"

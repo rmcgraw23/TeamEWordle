@@ -22,6 +22,9 @@ class Words
         string getWord();
         vector<string> getWords();
         void setWord(string word);
+        void setWords(vector<string> words);
+        void setRandomWord();
+
 
     protected:
 
@@ -30,7 +33,6 @@ class Words
         string word;
         vector<string> words;
         FileReader reader;
-        void setRandomWord();
 };
 
 }
