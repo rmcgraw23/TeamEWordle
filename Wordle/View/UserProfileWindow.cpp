@@ -8,6 +8,7 @@ UserProfileWindow::UserProfileWindow(int width, int height, const char* title, U
 {
     this->CurrentObject = 0;
     this->user = user;
+    //cout << this->user->getWinPercentage() << endl;
     this->values = {to_string(this->user->getGamesPlayed()), to_string(this->user->getWinPercentage()), to_string(this->user->getWinStreak()),
                     to_string(this->user->getMaxWinStreak())};
     this->GuessCount = 0;
@@ -23,7 +24,8 @@ UserProfileWindow::UserProfileWindow(int width, int height, const char* title, U
     this->SetUpStatisticsLabels(this->MaxWinStreakLabel);
     this->GuessLabel = new Fl_Output(220, 100, 0, 0, "Guess Distribution");
     this->SetUpGuessLabels();
-
+    this->NewGameButton = new Fl_Button(110, 150, 85, 30, "New Game");
+    this->NewGameButton->callback(handleNewGame, this);
     end();
     //this->updateOutputValues();
 }
@@ -77,6 +79,15 @@ void UserProfileWindow::updateOutputValues()
 {
     this->GamesPlayedOutput->label("H");
 
+}
+
+void UserProfileWindow::handleNewGame(Fl_Widget* widget, void* data)
+{
+    UserProfileWindow* current = (UserProfileWindow*)data;
+    WordleGameWindow* window = new WordleGameWindow(500, 600, "Wordle");
+    window->SetUpUser(current->user->getName());
+    window->show();
+    current->hide();
 }
 
 UserProfileWindow::~UserProfileWindow()

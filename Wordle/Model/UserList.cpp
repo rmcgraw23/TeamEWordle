@@ -5,6 +5,7 @@ namespace model{
 UserList::UserList()
 {
     FileReader reader = FileReader();
+    //this->users = new vector<User>();
     this->users = reader.ReadInUsers();
 }
 

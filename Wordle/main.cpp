@@ -39,7 +39,7 @@ int main (int argc, char ** argv)
   Fl_Window *window;
   Fl_Box *box;
 
-  WordleGameWindow mainWindow(500, 600, "Wordle by McGraw and Thompson");
+  //WordleGameWindow mainWindow(500, 600, "Wordle by McGraw and Thompson");
   //mainWindow.show();
 
   WordleStartUpWindow startWindow(400, 300, "Main Menu");

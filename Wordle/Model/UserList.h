@@ -5,8 +5,10 @@
 #include<vector>
 using namespace std;
 
+#include "../Datatier/FileReader.h"
+using namespace Datatier;
+
 #include "User.h"
-#include "FileReader.h"
 
 namespace model{
 

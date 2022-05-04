@@ -15,6 +15,8 @@ using namespace std;
 #include "User.h"
 using namespace model;
 
+#include "WordleGameWindow.h"
+
 namespace View{
 
 class UserProfileWindow : public Fl_Window
@@ -34,6 +36,7 @@ class UserProfileWindow : public Fl_Window
         Fl_Box *MaxWinStreakOutput;
         Fl_Output *MaxWinStreakLabel;
         Fl_Output *GuessLabel;
+        Fl_Button *NewGameButton;
 
         void SetUpStatisticsOutputs(Fl_Box* output);
         void SetUpStatisticsLabels(Fl_Output* label);
@@ -45,6 +48,8 @@ class UserProfileWindow : public Fl_Window
 
         User* user;
         vector<string> values;
+
+        static void handleNewGame(Fl_Widget* widget, void* data);
 
     public:
         UserProfileWindow(int width, int height, const char* title, User* user);

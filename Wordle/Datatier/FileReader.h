@@ -7,7 +7,7 @@ using namespace std;
 #include "User.h"
 using namespace model;
 
-namespace model
+namespace Datatier
 {
 
 class FileReader

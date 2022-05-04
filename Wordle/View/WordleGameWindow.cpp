@@ -1,8 +1,10 @@
 #include "WordleGameWindow.h"
 #include <algorithm>
-#include "FileReader.h"
 #include <stdlib.h>
 #define Level_1
+
+#include "../Datatier/FileReader.h"
+using namespace Datatier;
 
 namespace View
 {
@@ -33,13 +35,14 @@ WordleGameWindow::WordleGameWindow(int width, int height, const char* title) : F
     this->SetUpButtons();
     string result = "";
     end();
+    this->userList = new UserList();
     //Fl_Event_Handler event = new Fl_Event_Handler(keyhandler);
     //window = new WordleGameWindow(600, 500, "Wordle");
     this->GetWindow(this);
     Fl::add_handler(keyhandler);
     //this->buttons->at(19)->callback(EnterButtonClicked, this);
     //this->buttons->at(19)->when(FL_WHEN_ENTER_KEY_ALWAYS);
-    this->user = new User("fred");
+    this->user = NULL;
 }
 
 /**
@@ -53,19 +56,18 @@ WordleGameWindow::~WordleGameWindow()
 
 void WordleGameWindow::SetUpUser(const string& name)
 {
-    this->userList = new UserList();
+
     for (int i = 0; i < this->userList->getUsers().size(); i++)
     {
         if (this->userList->getUsers()[i]->getName() == name)
         {
             this->user = this->userList->getUsers()[i];
         }
-        else
-        {
-            this->user = new User(name);
-            this->userList->addUser(this->user);
-
-        }
+    }
+    if (this->user == NULL)
+    {
+        this->user = new User(name);
+        this->userList->addUser(this->user);
     }
 }
 
@@ -258,15 +260,20 @@ void WordleGameWindow::validateGuess(int start)
         {
             cout << "YOU WON" << endl;
             this->UpdateUserForWin(this->words.getGuessCount());
+            cout << this->userList->getUsers().size() << endl;
+            FileWriter writer = FileWriter("users.txt", this->userList->getUsers());
             UserProfileWindow* window = new UserProfileWindow(300, 200, "User Statistics", this->user);
             window->show();
+            this->hide();
             //window->setUser(this->user);
         }
         else if (this->word->getGuessCount() == 6)
         {
             this->UpdateUserForloss();
+            //FileWriter writer = FileWriter("users.txt", this->userList->getUsers());
             UserProfileWindow* window = new UserProfileWindow(300, 200, "User Statistics", this->user);
             window->show();
+            this->hide();
             //window->setUser(this->user);
         }
     }
@@ -281,14 +288,16 @@ void WordleGameWindow::UpdateUserForWin(int position)
         this->user->setMaxWinStreak(this->user->getWinStreak());
     }
     this->user->setOneGuessAmount(position, 1);
-    this->user->setWinPercentage((this->user->getTotalGuesses() / this->user->getGamesPlayed()) * 100);
+    double value = (float)this->user->getTotalGuesses() / this->user->getGamesPlayed();
+    this->user->setWinPercentage(round(value * 100));
 
 }
 
 void WordleGameWindow::UpdateUserForloss()
 {
     this->user->setGamesPlayed(this->user->getGamesPlayed() + 1);
-    this->user->setWinPercentage(this->user->getTotalGuesses() / this->user->getGamesPlayed());
+    double value = (float)this->user->getTotalGuesses() / this->user->getGamesPlayed();
+    this->user->setWinPercentage(round(value * 100);
     this->user->setWinStreak(0);
 }
 

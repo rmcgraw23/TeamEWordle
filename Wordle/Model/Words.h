@@ -2,11 +2,13 @@
 #define WORDS_H
 #include <string>
 #include <vector>
-#include "FileReader.h"
+
+#include "../Datatier/FileReader.h"
+using namespace Datatier;
 
 using namespace std;
 
-#include "FileReader.h"
+//#include "FileReader.h"
 
 namespace model
 {

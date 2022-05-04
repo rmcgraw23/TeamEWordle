@@ -48,6 +48,7 @@ int User::getTotalGuesses()
     {
         total += this->guessValues[i];
     }
+    return total;
 }
 
 void User::setName(string const& name)

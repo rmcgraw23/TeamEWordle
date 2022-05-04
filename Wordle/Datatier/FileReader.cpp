@@ -5,7 +5,7 @@
 #include <cctype>
 #include <algorithm>
 #include <sstream>
-namespace model
+namespace Datatier
 {
 
 /**
@@ -81,7 +81,6 @@ bool FileReader::isNotRepeating(string word)
 vector<User*> FileReader::ReadInUsers()
 {
     vector<User*> users;
-    vector<string> values;
     string line;
     ifstream myfile ("users.txt");
     if (myfile.is_open())
@@ -89,7 +88,8 @@ vector<User*> FileReader::ReadInUsers()
         while ( getline (myfile,line) )
         {
             stringstream ss(line);
-            while(getline(ss, line,  ' '))
+            vector<string> values;
+            while(getline(ss, line,  ','))
             {
                 values.push_back(line);
             }
