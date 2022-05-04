@@ -13,9 +13,10 @@ WordleGameWindow::WordleGameWindow(int width, int height, const char* title) : F
 {
     begin();
     this->words = Words();
-    this->LabelBuffer = new Fl_Box(100, 20, 50, 50);
+    this->LabelBuffer = new Fl_Box(100, 15, 50, 50);
     values = new vector<Fl_Box*>();
     buttons = new vector<Fl_Button*>();
+    this->setUpProgressBar();
     Fl_Button* setting = new Fl_Button(400, 20, 100, 50, "Repeat on");
     setting->callback(repeatButtonClicked, this);
     this->SetUpLetters();
@@ -36,6 +37,13 @@ void WordleGameWindow::disableEnterButton()
 {
     Fl_Button* enterButton = window->buttons->at(19);
     enterButton->deactivate();
+}
+
+void WordleGameWindow::setUpProgressBar() {
+    this->progressBar = new Fl_Progress(110, 10, 275, 20, "Guesses Remaining");
+    this->progressBar->color(FL_GREEN);
+    this->progressBar->maximum(6);
+    this->progressBar->selection_color(FL_RED);
 }
 
 /**
@@ -237,9 +245,10 @@ void WordleGameWindow::validateGuess(int start)
             case 1:
                 this->words.setRandomWord();
                 this->resetBoard();
+                this->progressBar->value(0);
             }
         }
-        else if (this->words.getGuessCount() == 5)
+        else if (this->words.getGuessCount() == 6)
         {
             switch ( fl_choice("You Lost! Would you like to play again?", "No", "Yes", 0) )
             {
@@ -252,10 +261,6 @@ void WordleGameWindow::validateGuess(int start)
         }
 
     }
-
-
-    //cout << word << endl;
-    //cout << guess << endl;
 }
 
 void WordleGameWindow::changeButtonColor(Fl_Color color, const char* letter)
@@ -279,18 +284,8 @@ void WordleGameWindow::GetWindow(WordleGameWindow* cwindow)
 int WordleGameWindow::keyhandler(int event)
 {
     int result = 0;
-    if (event == FL_KEYUP)
+    if (event == FL_SHORTCUT)
     {
-        cout << "hi" << endl;
-    }
-    else if (event == FL_SHORTCUT)
-    {
-
-        if (Fl::event_key() == FL_Enter)
-        {
-            //keyboardPressed;
-            result = 1;
-        }
         if (Fl::event_key() == FL_BackSpace)
         {
             window->DeleteLetter(window);
@@ -387,6 +382,8 @@ void WordleGameWindow::resetBoard()
         this->buttons->at(i)->color(FL_GRAY);
     }
     this->redraw();
+     this->progressBar->value(0);
+    this->words.setGuessCount(0);
 #ifdef Level_1
     cout << window->words.getWord() << endl;
 #endif
@@ -442,9 +439,11 @@ void WordleGameWindow::keyboardPressed(Fl_Widget* widget, void* data)
 void WordleGameWindow::EnterButtonClicked(Fl_Widget* widget, void* data)
 {
     WordleGameWindow* window = (WordleGameWindow*)data;
-    cout << window->currentBox << endl;
     if (window->isValidWord(window->currentBox - 5) && window->currentBox >= 5)
     {
+        window->words.setGuessCount(window->words.getGuessCount() + 1);
+        cout << window->words.getGuessCount() << endl;
+        window->progressBar->value(window->progressBar->value() + 1);
         window->enableButtons();
         window->validateGuess(0);
         window->validateGuess(5);
@@ -452,7 +451,7 @@ void WordleGameWindow::EnterButtonClicked(Fl_Widget* widget, void* data)
         window->validateGuess(15);
         window->validateGuess(20);
         window->validateGuess(25);
-        window->words.setGuessCount(window->words.getGuessCount() + 1);
+        window->guesses += 1;
     }
 
 }

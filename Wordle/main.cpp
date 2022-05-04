@@ -40,6 +40,7 @@ int main (int argc, char ** argv)
     Fl_Window *window;
     Fl_Box *box;
 
+
     WordleStartUpWindow startWindow(400, 300, "Main Menu");
     startWindow.show();
 

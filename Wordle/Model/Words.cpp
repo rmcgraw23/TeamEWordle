@@ -37,6 +37,8 @@ int Words::getGuessCount()
     return this->guessCount;
 }
 
+
+
 /**
 *Gets Words collection for the game
 *
@@ -64,7 +66,7 @@ string Words::getWord()
 */
 void Words::setGuessCount(int guesses)
 {
-    this->guessCount += guesses;
+    this->guessCount = guesses;
 }
 
 /**

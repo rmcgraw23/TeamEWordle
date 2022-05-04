@@ -12,6 +12,7 @@
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Input.H>
 #include <FL/fl_ask.H>
+#include <FL/Fl_Progress.H>
 #include "../Model/Words.h"
 
 #include <string>
@@ -40,6 +41,7 @@ class WordleGameWindow : public Fl_Window
         static const int HEIGHT_BUFFER = 50;
         static const int LETTERS_PER_ROW = 5;
         int currentBox = 0;
+        int guesses = 0;
         bool repeating = true;
         FileReader reader;
 
@@ -51,6 +53,7 @@ class WordleGameWindow : public Fl_Window
         string* keyboardButons;
         Fl_Box *LabelBuffer;
         Fl_Label *label;
+        Fl_Progress *progressBar;
         Fl_Output *FirstLetterOutput;
         Fl_Output *SecondLetterOutput;
         Fl_Output *ThirdLetterOutput;
@@ -66,6 +69,7 @@ class WordleGameWindow : public Fl_Window
         void validateGuess(int start);
         bool isValidWord(int start);
         void enableButtons();
+        void setUpProgressBar();
 
 
         void GetWindow(WordleGameWindow* cwindow);
