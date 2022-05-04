@@ -16,6 +16,7 @@
 					<Add directory="View" />
 					<Add directory="./" />
 					<Add directory="Model" />
+					<Add directory="Datatier" />
 				</Compiler>
 			</Target>
 		</Build>
@@ -25,6 +26,10 @@
 		<Linker>
 			<Add option="`fltk-config --ldstaticflags`" />
 		</Linker>
+		<Unit filename="Datatier/FileReader.cpp" />
+		<Unit filename="Datatier/FileReader.h" />
+		<Unit filename="Datatier/FileWriter.cpp" />
+		<Unit filename="Datatier/FileWriter.h" />
 		<Unit filename="Model/FileReader.cpp" />
 		<Unit filename="Model/FileReader.h" />
 		<Unit filename="Model/User.cpp" />
@@ -33,13 +38,16 @@
 		<Unit filename="Model/UserList.h" />
 		<Unit filename="Model/Words.cpp" />
 		<Unit filename="Model/Words.h" />
-		<Unit filename="UserProfileWindow.cpp" />
-		<Unit filename="UserProfileWindow.h" />
+		<Unit filename="View/UserProfileWindow.cpp" />
+		<Unit filename="View/UserProfileWindow.h" />
 		<Unit filename="View/WordleGameWindow.cpp" />
 		<Unit filename="View/WordleGameWindow.h" />
 		<Unit filename="View/WordleStartUpWindow.cpp" />
 		<Unit filename="View/WordleStartUpWindow.h" />
+		<Unit filename="dictionary.txt" />
 		<Unit filename="main.cpp" />
+		<Unit filename="notes.txt" />
+		<Unit filename="users.txt" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

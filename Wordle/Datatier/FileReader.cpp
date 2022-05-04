@@ -4,8 +4,8 @@
 #include <string>
 #include <cctype>
 #include <algorithm>
-
-namespace model
+#include <sstream>
+namespace Datatier
 {
 
 /**
@@ -76,6 +76,46 @@ bool FileReader::isNotRepeating(string word)
         }
     }
     return true;
+}
+
+vector<User*> FileReader::ReadInUsers()
+{
+    vector<User*> users;
+    string line;
+    ifstream myfile ("users.txt");
+    if (myfile.is_open())
+    {
+        while ( getline (myfile,line) )
+        {
+            stringstream ss(line);
+            vector<string> values;
+            while(getline(ss, line,  ','))
+            {
+                values.push_back(line);
+            }
+            //vector<int> values = {stoi(values[4]), stoi(stoi(stoi(values[5]), stoi(values[6]), stoi(values[7]),
+            //stoi(values[8]), stoi(values[9])};
+            User* user = this->setUserStatistics(values);
+            users.push_back(user);
+        }
+    }
+    return users;
+}
+
+User* FileReader::setUserStatistics(vector<string> values)
+{
+    User* user = new User(values[0]);
+    user->setGamesPlayed(stoi(values[1]));
+    user->setWinPercentage(stoi(values[2]));
+    user->setWinStreak(stoi(values[3]));
+    user->setMaxWinStreak(stoi(values[4]));
+    vector<int> guesses;
+    for (int i = 5; i < 11; i++)
+    {
+        guesses.push_back(stoi(values[i]));
+    }
+    user->setGuessAmount(guesses);
+    return user;
 }
 
 }

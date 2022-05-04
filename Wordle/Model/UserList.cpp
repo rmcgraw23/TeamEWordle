@@ -1,12 +1,13 @@
 #include "UserList.h"
-#include "FileReader.h"
 
-namespace model{
+namespace model
+{
 
 UserList::UserList()
 {
     FileReader reader = FileReader();
-//    this->users = reader.ReadInUsers();
+    //this->users = new vector<User>();
+    this->users = reader.ReadInUsers();
 }
 
 vector<User*> UserList::getUsers()
