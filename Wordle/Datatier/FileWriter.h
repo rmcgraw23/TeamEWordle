@@ -13,11 +13,11 @@ using namespace model;
 
 class FileWriter
 {
-    private:
-        string formatOutput(vector<User*> users);
-    public:
-        FileWriter(const string& filename, vector<User*> users);
-        virtual ~FileWriter();
+private:
+    string formatOutput(vector<User*> users);
+public:
+    FileWriter(const string& filename, vector<User*> users);
+    virtual ~FileWriter();
 
 };
 

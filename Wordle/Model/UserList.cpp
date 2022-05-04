@@ -1,6 +1,7 @@
 #include "UserList.h"
 
-namespace model{
+namespace model
+{
 
 UserList::UserList()
 {

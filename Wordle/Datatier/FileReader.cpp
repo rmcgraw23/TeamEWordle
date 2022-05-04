@@ -94,7 +94,7 @@ vector<User*> FileReader::ReadInUsers()
                 values.push_back(line);
             }
             //vector<int> values = {stoi(values[4]), stoi(stoi(stoi(values[5]), stoi(values[6]), stoi(values[7]),
-                                    //stoi(values[8]), stoi(values[9])};
+            //stoi(values[8]), stoi(values[9])};
             User* user = this->setUserStatistics(values);
             users.push_back(user);
         }

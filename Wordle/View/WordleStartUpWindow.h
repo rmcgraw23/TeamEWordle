@@ -18,28 +18,29 @@ using namespace model;
 
 #include "WordleGameWindow.h"
 
-namespace View {
+namespace View
+{
 
 class WordleStartUpWindow : public Fl_Window
 {
-    private:
-        Fl_Output *Header;
-        Fl_Output *EnterNameLabel;
-        Fl_Input *NameInput;
-        Fl_Output *SettingsLabel;
-        Fl_Button *SettingsButton;
-        Fl_Button *StartButton;
+private:
+    Fl_Output *Header;
+    Fl_Output *EnterNameLabel;
+    Fl_Input *NameInput;
+    Fl_Output *SettingsLabel;
+    Fl_Button *SettingsButton;
+    Fl_Button *StartButton;
 
-        WordleGameWindow *mainWindow;
+    WordleGameWindow *mainWindow;
 
-        string username;
+    string username;
 
-    public:
-        WordleStartUpWindow(int width, int height, const char* title);
-        virtual ~WordleStartUpWindow();
+public:
+    WordleStartUpWindow(int width, int height, const char* title);
+    virtual ~WordleStartUpWindow();
 
-        static void HandleSettings(Fl_Widget* widget, void* data);
-        static void HandleStart(Fl_Widget* widget, void* data);
+    static void HandleSettings(Fl_Widget* widget, void* data);
+    static void HandleStart(Fl_Widget* widget, void* data);
 };
 
 }

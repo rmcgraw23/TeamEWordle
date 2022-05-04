@@ -2,7 +2,8 @@
 
 #include <iostream>
 
-namespace View{
+namespace View
+{
 
 UserProfileWindow::UserProfileWindow(int width, int height, const char* title, User* user) : Fl_Window(width, height, title)
 {
@@ -10,7 +11,8 @@ UserProfileWindow::UserProfileWindow(int width, int height, const char* title, U
     this->user = user;
     //cout << this->user->getWinPercentage() << endl;
     this->values = {to_string(this->user->getGamesPlayed()), to_string(this->user->getWinPercentage()), to_string(this->user->getWinStreak()),
-                    to_string(this->user->getMaxWinStreak())};
+                    to_string(this->user->getMaxWinStreak())
+                   };
     this->GuessCount = 0;
     begin();
     this->Header = new Fl_Output(180, 15, 0, 0, "Statistics");
@@ -24,18 +26,16 @@ UserProfileWindow::UserProfileWindow(int width, int height, const char* title, U
     this->SetUpStatisticsLabels(this->MaxWinStreakLabel);
     this->GuessLabel = new Fl_Output(220, 100, 0, 0, "Guess Distribution");
     this->SetUpGuessLabels();
-    this->NewGameButton = new Fl_Button(110, 150, 85, 30, "New Game");
-    this->NewGameButton->callback(handleNewGame, this);
     end();
     //this->updateOutputValues();
 }
 
 void UserProfileWindow::SetUpStatisticsLabels(Fl_Output* label)
 {
-     int x = (this->CurrentObject * 40) + InitialPosition + 23;
-     label = new Fl_Output(x + 10, 70, 0, 0, this->labelValues[this->CurrentObject].c_str());
-     label->labelsize(10);
-     this->CurrentObject += 1;
+    int x = (this->CurrentObject * 40) + InitialPosition + 23;
+    label = new Fl_Output(x + 10, 70, 0, 0, this->labelValues[this->CurrentObject].c_str());
+    label->labelsize(10);
+    this->CurrentObject += 1;
 }
 
 void UserProfileWindow::SetUpStatisticsOutputs(Fl_Box* output)
@@ -55,7 +55,8 @@ void UserProfileWindow::SetUpGuessLabels()
     this->guessValues = new vector<Fl_Output*>;
     vector<const char*> values = {"1", "2", "3", "4", "5", "6"};
     vector<string> vals = {to_string(this->user->getguesses()[0]), to_string(this->user->getguesses()[1]), to_string(this->user->getguesses()[2]),
-                            to_string(this->user->getguesses()[3]), to_string(this->user->getguesses()[4]), to_string(this->user->getguesses()[5])};
+                           to_string(this->user->getguesses()[3]), to_string(this->user->getguesses()[4]), to_string(this->user->getguesses()[5])
+                          };
     int x = 60;
     for (int i = 0; i < 6; i++)
     {
@@ -86,6 +87,7 @@ void UserProfileWindow::handleNewGame(Fl_Widget* widget, void* data)
     UserProfileWindow* current = (UserProfileWindow*)data;
     WordleGameWindow* window = new WordleGameWindow(500, 600, "Wordle");
     window->SetUpUser(current->user->getName());
+    window->resetBoard();
     window->show();
     current->hide();
 }

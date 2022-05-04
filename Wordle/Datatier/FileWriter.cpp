@@ -19,7 +19,7 @@ string FileWriter::formatOutput(vector<User*> users)
     for (int i = 0; i < users.size(); i++)
     {
         buffer << users[i]->getName() << "," << users[i]->getGamesPlayed() << "," << users[i]->getWinPercentage() << "," << users[i]->getWinStreak() << "," <<
-        users[i]->getMaxWinStreak();
+               users[i]->getMaxWinStreak();
         //cout << buffer.str() << endl;
         for (int j = 0; j < users[i]->getguesses().size(); j++)
         {

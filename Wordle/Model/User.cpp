@@ -1,6 +1,7 @@
 #include "User.h"
 
-namespace model{
+namespace model
+{
 
 User::User(const string& name)
 {

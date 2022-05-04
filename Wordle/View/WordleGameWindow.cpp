@@ -31,7 +31,7 @@ WordleGameWindow::WordleGameWindow(int width, int height, const char* title) : F
     string result = "";
     end();
     this->userList = new UserList();
-  
+
     this->GetWindow(this);
     Fl::add_handler(keyhandler);
     this->user = NULL;
@@ -44,7 +44,8 @@ void WordleGameWindow::disableEnterButton()
     enterButton->deactivate();
 }
 
-void WordleGameWindow::setUpProgressBar() {
+void WordleGameWindow::setUpProgressBar()
+{
     this->progressBar = new Fl_Progress(110, 10, 275, 20, "Guesses Remaining");
     this->progressBar->color(FL_GREEN);
     this->progressBar->maximum(6);
@@ -240,7 +241,8 @@ void WordleGameWindow::validateGuess(int start)
         }
         count++;
         redraw();
-        /*if (guess == word)
+
+        if (guess == word)
         {
             switch ( fl_choice("You Won! Would you like to play again?", "No", "Yes", 0) )
             {
@@ -249,8 +251,14 @@ void WordleGameWindow::validateGuess(int start)
             case 1:
                 this->words.setRandomWord();
                 this->resetBoard();
-                this->progressBar->value(0);
             }
+            this->progressBar->value(0);
+            this->UpdateUserForWin(this->words.getGuessCount());
+            cout << this->userList->getUsers().size() << endl;
+            FileWriter writer = FileWriter("users.txt", this->userList->getUsers());
+            UserProfileWindow* window = new UserProfileWindow(300, 200, "User Statistics", this->user);
+            window->show();
+            this->words.setGuessCount(0);
         }
         else if (this->words.getGuessCount() == 6)
         {
@@ -262,31 +270,12 @@ void WordleGameWindow::validateGuess(int start)
                 this->words.setRandomWord();
                 this->resetBoard();
             }
-     	}*/
-        this->word->setGuessCount(1);
-
-
-        if (guess == word)
-        {
-            cout << "YOU WON" << endl;
             this->progressBar->value(0);
-            this->UpdateUserForWin(this->words.getGuessCount());
-            cout << this->userList->getUsers().size() << endl;
-            FileWriter writer = FileWriter("users.txt", this->userList->getUsers());
-            UserProfileWindow* window = new UserProfileWindow(300, 200, "User Statistics", this->user);
-            window->show();
-            this->hide();
-            //window->setUser(this->user);
-        }
-        else if (this->word->getGuessCount() == 6)
-        {
-        	this->progressBar->value(0);
             this->UpdateUserForloss();
-            //FileWriter writer = FileWriter("users.txt", this->userList->getUsers());
+
             UserProfileWindow* window = new UserProfileWindow(300, 200, "User Statistics", this->user);
             window->show();
-            this->hide();
-            //window->setUser(this->user);
+            this->words.setGuessCount(0);
         }
     }
 }
@@ -309,7 +298,7 @@ void WordleGameWindow::UpdateUserForloss()
 {
     this->user->setGamesPlayed(this->user->getGamesPlayed() + 1);
     double value = (float)this->user->getTotalGuesses() / this->user->getGamesPlayed();
-    this->user->setWinPercentage(round(value * 100);
+    this->user->setWinPercentage(round(value * 100));
     this->user->setWinStreak(0);
 }
 
@@ -432,7 +421,7 @@ void WordleGameWindow::resetBoard()
         this->buttons->at(i)->color(FL_GRAY);
     }
     this->redraw();
-     this->progressBar->value(0);
+    this->progressBar->value(0);
     this->words.setGuessCount(0);
 #ifdef Level_1
     cout << window->words.getWord() << endl;
