@@ -40,7 +40,6 @@ class WordleStartUpWindow : public Fl_Window
 
         static void HandleSettings(Fl_Widget* widget, void* data);
         static void HandleStart(Fl_Widget* widget, void* data);
-
 };
 
 }

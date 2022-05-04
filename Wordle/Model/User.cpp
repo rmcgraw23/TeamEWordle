@@ -44,10 +44,11 @@ vector<int> User::getguesses()
 int User::getTotalGuesses()
 {
     int total = 0;
-    for (int i = 0; i < this->guessValues.size(); i++)
+    for (int i = 0; i < 6; i++)
     {
         total += this->guessValues[i];
     }
+    return total;
 }
 
 void User::setName(string const& name)

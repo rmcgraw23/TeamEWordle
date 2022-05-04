@@ -21,6 +21,7 @@
 #include <iostream>
 #include <algorithm>
 #include <cstring>
+#include <cmath>
 using namespace std;
 
 #include <../Model/Words.h>
@@ -28,7 +29,10 @@ using namespace std;
 #include<UserList.h>
 using namespace model;
 
-#include "../UserProfileWindow.h"
+#include "FileWriter.h"
+using namespace Datatier;
+
+#include "UserProfileWindow.h"
 
 namespace View {
 
